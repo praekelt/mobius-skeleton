@@ -29,13 +29,15 @@ urlpatterns = [
     url(r"^api/(?P<version>(v1))/", include(router.urls)),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^jmbo/", include("jmbo.urls", namespace="jmbo")),
-    url(r"^comments/", include("django_comments.urls", namespace="comments")),
     url(r"^post/", include("post.urls", namespace="post")),
     url(r"^link/", include("link.urls", namespace="link")),
     url(r"^navbuilder/", include("navbuilder.urls", namespace="navbuilder")),
     url(r"^api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     url(r"^api-auth/$", obtain_jwt_token, name="obtain_token"),
     url(r"^mote/", include("mote.urls", namespace="mote")),
+    url(r"^auth/", include("django.contrib.auth.urls", namespace="auth")),
+    # Comments can't handle namespaces
+    url(r"^comments/", include("django_comments.urls")),
 ]
 
 if settings.DEBUG:

@@ -3,7 +3,7 @@ from project.settings_mobius import *
 
 # Out app must be first
 INSTALLED_APPS = list(INSTALLED_APPS)
-INSTALLED_APPS.insert(0, "skeleton")
+INSTALLED_APPS = ["skeleton"] + INSTALLED_APPS
 
 # Configuration for our app
 SKELETON = {

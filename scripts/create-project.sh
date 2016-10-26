@@ -52,6 +52,8 @@ sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/project/*.py
 sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/MANIFEST.in
 sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/tox.ini
 sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/.travis.yml
+APP_UPPER=`echo ${APP} | tr '[:lower:]' '[:upper:]'`
+sed -i s/SKELETON/${APP_UPPER}/g ${PROJECT_DIR}/project/settings.py
 sed -i s/skeleton/${APP}/g ${APP_DIR}/*.py
 sed -i s/skeleton/${APP}/g ${APP_DIR}/migrations/*.py
 sed -i s/skeleton/${APP}/g ${APP_DIR}/tests/settings/*.py

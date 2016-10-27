@@ -60,6 +60,7 @@ sed -i s/skeleton/${APP}/g ${APP_DIR}/tests/settings/*.py
 
 # Rename directories
 mv ${APP_DIR}/templates/skeleton ${APP_DIR}/templates/${APP}
+mv ${APP_DIR}/static/skeleton ${APP_DIR}/static/${APP}
 
 # Set the secret key
 SECRET_KEY=`date +%s | sha256sum | head -c 56`

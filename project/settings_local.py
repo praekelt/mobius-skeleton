@@ -1,4 +1,5 @@
 # Declare or redeclare variables here
+ALLOWED_HOSTS = ["*"]
 FOOFOO = 1
 
 

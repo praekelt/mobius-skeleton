@@ -10,7 +10,7 @@
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 
-Django=>1.9.6,<2.0
+Django>=1.9.6,<1.10
 django-category==1.9
 django-contrib-comments==1.7.1
 django-export==1.9

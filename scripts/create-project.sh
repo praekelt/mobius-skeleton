@@ -40,9 +40,6 @@ cp -r skeleton ${PROJECT_DIR}/${APP}
 # Delete pyc files
 find ${PROJECT_DIR} -name "*.pyc" | xargs rm
 
-# Delete possible settings_local
-rm ${PROJECT_DIR}/project/settings_local.*
-
 # Change strings in the newly copied source
 sed -i s/name=\'jmbo-skeleton\'/name=\'${APP}\'/ ${PROJECT_DIR}/setup.py
 

@@ -23,6 +23,7 @@ INSTALLED_APPS = (
     "django_comments",
     "likes",
     "link",
+    "layers",
     "listing",
     "navbuilder",
     "formfactory",

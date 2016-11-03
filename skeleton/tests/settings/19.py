@@ -17,6 +17,7 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
+    "skeleton",
     "mobius",
     "jmbo",
     "photologue",

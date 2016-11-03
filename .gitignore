@@ -17,3 +17,4 @@ photologue/
 .DS_Store
 node_modules
 bower_components
+settings_local.py

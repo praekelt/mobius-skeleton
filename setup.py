@@ -1,11 +1,24 @@
 from setuptools import setup, find_packages
 
 
+def get_long_description():
+    description = ""
+    for name in ("README.rst", "AUTHORS.rst", "CHANGELOG.rst"):
+        try:
+            fp = open(name, "r")
+            description += fp.read()
+        except IOError:
+            pass
+        finally:
+            fp.close()
+    return description
+
+
 setup(
     name="mobius-skeleton",
     version="0.1",
     description="Create a Mobius project environment quickly.",
-    long_description = open("README.rst", "r").read() + open("AUTHORS.rst", "r").read() + open("CHANGELOG.rst", "r").read(),
+    long_description = get_long_description(),
     author="Praekelt Consulting",
     author_email="dev@praekelt.com",
     license="BSD",

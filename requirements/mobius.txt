@@ -43,3 +43,4 @@ cached-property==1.2.0
 lxml==3.6.4
 django-webpack-loader==0.3.3
 django-layers-hr==1.9
+django-nested-admin==3.0.12

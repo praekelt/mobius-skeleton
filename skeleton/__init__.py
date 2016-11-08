@@ -1,7 +1,8 @@
 from django.conf import settings
 
-
+SETTINGS = {}
 try:
-    SETTINGS = settings.SKELETON
+    SETTINGS.update(settings.SKELETON)
 except AttributeError:
-    SETTINGS = {}
+    # No overrides
+    pass

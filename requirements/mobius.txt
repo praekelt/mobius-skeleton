@@ -7,6 +7,7 @@
 -e git+https://github.com/praekelt/django-navbuilder.git@develop#egg=django-navbuilder
 -e git+https://github.com/praekelt/django-formfactory.git@develop#egg=django-formfactory
 -e git+https://github.com/praekelt/jmbo-listing.git@develop#egg=jmbo-listing
+-e git+git@github.com:praekelt/jmbo-composer.git@develop#egg=jmbo-composer
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 

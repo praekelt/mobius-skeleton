@@ -34,6 +34,7 @@ INSTALLED_APPS = (
     "ultracache",
     "sites_groups",
     "mote",
+    "composer",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

@@ -39,6 +39,7 @@ urlpatterns = [
     url(r"^auth/", include("django.contrib.auth.urls", namespace="auth")),
     # Comments can't handle namespaces
     url(r"^comments/", include("django_comments.urls")),
+    url(r"^nested_admin/", include("nested_admin.urls")),
 ]
 
 if settings.DEBUG:

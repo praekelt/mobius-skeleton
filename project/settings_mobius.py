@@ -16,7 +16,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     # The order is important
-    "skeleton",
     "mobius",
     "jmbo",
     "photologue",

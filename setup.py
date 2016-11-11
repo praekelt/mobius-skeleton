@@ -23,8 +23,8 @@ setup(
     author_email="dev@praekelt.com",
     license="BSD",
     url="",
-    packages = find_packages(),
-    install_requires = [
+    packages=find_packages(),
+    install_requires=[
         # Handled by requirements file
     ],
     include_package_data=True,

@@ -15,6 +15,8 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
+    # The order is important
+    "skeleton",
     "mobius",
     "jmbo",
     "photologue",
@@ -23,17 +25,17 @@ INSTALLED_APPS = (
     "django_comments",
     "likes",
     "link",
-    "layers",
     "listing",
+    "mote",
     "navbuilder",
     "formfactory",
     "secretballot",
     "pagination",
     "post",
     "preferences",
-    "ultracache",
     "sites_groups",
-    "mote",
+
+    # Django apps can be alphabetic
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,8 +43,14 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # These apps have no templates
+    "celery",
+    "layers",
     "rest_framework",
-    "rest_framework_extras"
+    "rest_framework_extras",
+    "ultracache",
+    "webpack_loader",
 )
 
 MIDDLEWARE_CLASSES = (

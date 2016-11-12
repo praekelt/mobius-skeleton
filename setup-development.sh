@@ -2,7 +2,7 @@
 
 # The name of the virtual environment can be passed as an optional argument to
 # this script. It defaults to "ve".
-VENV=${1:=ve}
+VENV=${1:-ve}
 
 echo "Ensuring required system libraries are installed. You may be prompted for your password."
 sudo apt-get install python-virtualenv python-dev \

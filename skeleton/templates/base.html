@@ -1,0 +1,31 @@
+<!doctype html>
+{% if slots %}
+{% load composer_tags %}
+{% endif %}
+{% comment %}
+ATM a very basic template to show the slots
+{% endcomment %}
+
+<body>
+    <div id="headerslot">
+        {% if slots.header %}
+        {% composer 'header' %}
+        {% else %}
+        Header slot: to populate this, add a header slot with url '/'
+        {% endif %}
+    </div>
+    <div id="contentslot">
+        {% if slots.content %}
+        {% composer 'content' %}
+        {% else %}
+        Content slot: to populate this, add a content slot with url '/'
+        {% endif %}
+    </div>
+    <div id="footerslot">
+        {% if slots.footer %}
+        {% composer 'footer' %}
+        {% else %}
+        Footer slot: to populate this, add a footer slot with url '/'
+        {% endif %}
+    </div>
+</body>

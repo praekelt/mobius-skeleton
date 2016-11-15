@@ -16,11 +16,13 @@
         {% endif %}
     </div>
     <div id="contentslot"{% if not slots.sidebar %} class="wide"{% endif %}>
+        {% block content %}
         {% if slots.content %}
             {% composer content %}
         {% else %}
             Content slot: to populate this, add a content slot with url '/'
         {% endif %}
+        {% endblock %}
     </div>
     {% if slots.sidebar %}
         <div id="sidebar">

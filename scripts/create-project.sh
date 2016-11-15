@@ -15,9 +15,14 @@ then
     CREATE_DIR=$adir
 fi
 
+# We need these variations
+APP_UPPER=`echo ${APP} | tr '[:lower:]' '[:upper:]'`
+APP_UNDERSCORE=`echo ${APP} | sed -r 's/-/_/g'`
+APP_UNDERSCORE_UPPER=`echo ${APP_UNDERSCORE} | tr '[:lower:]' '[:upper:]'`
+
 # Create the project
 PROJECT_DIR=${CREATE_DIR}/${APP}
-APP_DIR=${PROJECT_DIR}/${APP}
+APP_DIR=${PROJECT_DIR}/${APP_UNDERSCORE}
 mkdir $PROJECT_DIR
 
 # Copy requisite bits
@@ -31,33 +36,24 @@ cp .travis.yml ${PROJECT_DIR}/
 touch ${PROJECT_DIR}/AUTHORS.rst
 touch ${PROJECT_DIR}/CHANGELOG.rst
 touch ${PROJECT_DIR}/README.rst
-cp -r scripts ${PROJECT_DIR}/
 cp -r project ${PROJECT_DIR}/
 cp -r fed ${PROJECT_DIR}/
 cp -r requirements ${PROJECT_DIR}/
-cp -r skeleton ${PROJECT_DIR}/${APP}
+cp -r skeleton ${APP_DIR}
 
 # Delete pyc files
 find ${PROJECT_DIR} -name "*.pyc" | xargs rm
 
 # Change strings in the newly copied source
-sed -i s/name=\'jmbo-skeleton\'/name=\'${APP}\'/ ${PROJECT_DIR}/setup.py
+sed -i s/name=\"mobius-skeleton\"/name=\"${APP}\"/ ${PROJECT_DIR}/setup.py
 
-# Replace the word skeleton with the app name
-sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/*.py
-sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/project/*.py
-sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/MANIFEST.in
-sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/tox.ini
-sed -i s/skeleton/${APP}/g ${PROJECT_DIR}/.travis.yml
-APP_UPPER=`echo ${APP} | tr '[:lower:]' '[:upper:]'`
-sed -i s/SKELETON/${APP_UPPER}/g ${PROJECT_DIR}/project/settings.py
-sed -i s/skeleton/${APP}/g ${APP_DIR}/*.py
-sed -i s/skeleton/${APP}/g ${APP_DIR}/migrations/*.py
-sed -i s/skeleton/${APP}/g ${APP_DIR}/tests/settings/*.py
+# Replace the word skeleton with the app name, taking care to exclude some files
+find ${PROJECT_DIR} -type f -exec sed -i s/SKELETON/${APP_UNDERSCORE_UPPER}/g {} +
+find ${PROJECT_DIR} -type f \( ! -iname "setup.py" \) -exec sed -i s/skeleton/${APP_UNDERSCORE}/g {} +
 
 # Rename directories
-mv ${APP_DIR}/templates/skeleton ${APP_DIR}/templates/${APP}
-mv ${APP_DIR}/static/skeleton ${APP_DIR}/static/${APP}
+mv ${APP_DIR}/templates/skeleton ${APP_DIR}/templates/${APP_UNDERSCORE}
+mv ${APP_DIR}/static/skeleton ${APP_DIR}/static/${APP_UNDERSCORE}
 
 # Set the secret key
 SECRET_KEY=`date +%s | sha256sum | head -c 56`

@@ -1,31 +1,37 @@
 <!doctype html>
 {% if slots %}
-{% load composer_tags %}
+    {% load composer_tags %}
 {% endif %}
 {% comment %}
-ATM a very basic template to show the slots
+    ATM a very basic template to show the slots in action.
+    Note the sidebar slot that can be switched on/off at will.
 {% endcomment %}
 
 <body>
     <div id="headerslot">
         {% if slots.header %}
-        {% composer 'header' %}
+            {% composer header %}
         {% else %}
-        Header slot: to populate this, add a header slot with url '/'
+            Header slot: to populate this, add a header slot with url '/'
         {% endif %}
     </div>
-    <div id="contentslot">
+    <div id="contentslot"{% if not slots.sidebar %} class="wide"{% endif %}>
         {% if slots.content %}
-        {% composer 'content' %}
+            {% composer content %}
         {% else %}
-        Content slot: to populate this, add a content slot with url '/'
+            Content slot: to populate this, add a content slot with url '/'
         {% endif %}
     </div>
+    {% if slots.sidebar %}
+        <div id="sidebar">
+            {% composer sidebar %}
+        </div>
+    {% endif %}
     <div id="footerslot">
         {% if slots.footer %}
-        {% composer 'footer' %}
+            {% composer footer %}
         {% else %}
-        Footer slot: to populate this, add a footer slot with url '/'
+            Footer slot: to populate this, add a footer slot with url '/'
         {% endif %}
     </div>
 </body>

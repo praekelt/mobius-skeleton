@@ -1,0 +1,57 @@
+{
+    "parser": "babel-eslint",
+
+    "plugins": [],
+
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "globalReturn": true,
+            "jsx": true,
+            "modules": true,
+        }
+    },
+
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true,
+        "commonjs": true
+    },
+
+    "globals": {
+        "document": true,
+        "escape": true,
+        "navigator": true,
+        "unescape": true,
+        "window": true,
+        "describe": true,
+        "before": true,
+        "it": true,
+        "expect": true,
+        "sinon": true
+    },
+
+    "rules": {
+        "quotes": ["error", "single"],
+        "strict": ["error", "global"],
+        "require-jsdoc": [0],
+        "valid-jsdoc": [0],
+        "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+        "camelcase": ["error", { "properties": "always" }],
+        "block-spacing": ["error", "always"],
+        "comma-style": ["error", "last"],
+        "comma-spacing": ["error", { "before": false, "after": true }],
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "no-ternary": [0],
+        "padded-blocks": ["error", "never"],
+        "semi-spacing": ["error"],
+        "space-infix-ops": ["error"],
+        "keyword-spacing": ["error"],
+        "space-in-parens": ["error", "never"],
+        "no-mixed-spaces-and-tabs": ["error"],
+        "eqeqeq": ["error", "smart"],
+        "quote-props": ["error", "consistent", { "keywords": true, "unnecessary": false }]
+    }
+}

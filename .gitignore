@@ -18,3 +18,4 @@ photologue/
 node_modules
 bower_components
 settings_local.py
+**/static/**/generated_statics

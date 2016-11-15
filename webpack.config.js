@@ -1,3 +1,6 @@
+// #############
+// SETUP
+
 const
     Path = require('path'),
 
@@ -8,19 +11,25 @@ const
     Merge = require('webpack-merge'),
     Validate = require('webpack-validator'),
 
-    // Dependencies dict in package.json
+    // Grab dependencies dict from package.json
     Dependencies = Object.keys(require('./package.json')).dependencies || {};
 
 // Set environment variables
 const LifecycleEvent = process.env.npm_lifecycle_event;
 const Argv = require('yargs')
-    .default('projectName', 'skeleton')
+    .default('projectName', 'skeleton') // @TODO: Change this to your project's actual name.
     .default('projectAspect', 'website')
     .argv;
 
 const MotePath = `/mote/projects/${Argv.projectName}/${Argv.projectAspect}`;
 const DjangoStaticDir = `/${Argv.projectName}/static/${Argv.projectName}/`;
 const PublicStaticPath = `/static/${Argv.projectName}/generated_statics/bundles/`;
+
+const ProjectPaths = {
+    root: Path.join(__dirname, MotePath),
+    src: Path.join(__dirname, MotePath + '/src'),
+    dist: Path.join(__dirname, DjangoStaticDir + '/generated_statics/bundles')
+};
 
 function filenamePattern(prefix, ext) {
     return `${prefix}.[name].[chunkhash].${ext}`;
@@ -30,13 +39,11 @@ function bundlenamePattern(project, aspect) {
     return `./${project}-bundlemap-${aspect}.json`;
 }
 
-const ProjectPaths = {
-    root: Path.join(__dirname, MotePath),
-    src: Path.join(__dirname, MotePath + '/src'),
-    dist: Path.join(__dirname, DjangoStaticDir + '/generated_statics/bundles')
-};
 
-// Shared config between builds.
+
+// #############
+// WEBPACK BUILD
+
 const BASE_CONFIG = {
     entry: {
         main: ProjectPaths.src + '/main.js'
@@ -85,7 +92,6 @@ function configBuilder(process, config) {
     switch (process) {
         // ################
         // Production Build
-        // ################
         case 'build':
             mergedConfig = Merge(
                 config,
@@ -135,9 +141,9 @@ function configBuilder(process, config) {
             );
             break;
 
+
         // #################
         // Development Build
-        // #################
         case 'build:dev':
             mergedConfig = Merge(
                 config,
@@ -192,5 +198,6 @@ function configBuilder(process, config) {
 
     return mergedConfig;
 }
+
 
 module.exports = Validate(configBuilder(LifecycleEvent, BASE_CONFIG));

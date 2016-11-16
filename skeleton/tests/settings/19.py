@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     # These apps have no templates
     "celery",
     "layers",
+    "raven.contrib.django.raven_compat",
     "rest_framework",
     "rest_framework_extras",
     "ultracache",
@@ -135,6 +136,57 @@ CKEDITOR_UPLOAD_PATH = expanduser("~")
 
 MEDIA_ROOT = "%s/media/" % BASE_DIR
 MEDIA_URL = "/media/"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "filters": {
+         "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+         }
+     },
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "WARN",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose"
+        },
+        "sentry": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "raven.contrib.django.handlers.SentryHandler",
+        },
+    },
+    "loggers": {
+        "raven": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "sentry.errors": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": "WARN",
+            "propagate": False,
+        },
+    },
+}
+
+# Dummy cache is the default
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+    }
+}
 
 WEBPACK_LOADER = {
     "DEFAULT": {

@@ -33,11 +33,18 @@ cp manage.py ${PROJECT_DIR}/
 cp MANIFEST.in ${PROJECT_DIR}/
 cp tox.ini ${PROJECT_DIR}/
 cp .travis.yml ${PROJECT_DIR}/
+cp .babelrc ${PROJECT_DIR}/
+cp .editorconfig ${PROJECT_DIR}/
+cp .eslintrc ${PROJECT_DIR}/
+cp .nvmrc ${PROJECT_DIR}/
+cp package.json ${PROJECT_DIR}/
+cp .stylelintrc ${PROJECT_DIR}/
+cp webpack.config.js ${PROJECT_DIR}/
+cp yarn.lock ${PROJECT_DIR}/
 touch ${PROJECT_DIR}/AUTHORS.rst
 touch ${PROJECT_DIR}/CHANGELOG.rst
 touch ${PROJECT_DIR}/README.rst
 cp -r project ${PROJECT_DIR}/
-cp -r fed ${PROJECT_DIR}/
 cp -r requirements ${PROJECT_DIR}/
 cp -r skeleton ${APP_DIR}
 

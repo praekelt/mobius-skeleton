@@ -1,0 +1,24 @@
+.Block {
+    $block: &;
+
+    // Block specific styles
+    &--blockModifier {
+        #{$block}-element {
+
+        }
+    }
+
+    // Element specific styles
+    &-element {
+        &--elementModifier {
+
+        }
+    }
+
+    // Block state styles
+    &.is-stateType {
+        #{$block}-element {
+
+        }
+    }
+}

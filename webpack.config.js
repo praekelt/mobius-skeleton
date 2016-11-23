@@ -1,7 +1,7 @@
 // #############
 // SETUP
 
-const BASE_PROJECT_NAME = 'skeleton'; // @TODO Replace this with your Django project name.
+const BASE_PROJECT_NAME = 'skeleton';
 
 const
     Path = require('path'),

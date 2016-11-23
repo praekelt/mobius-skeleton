@@ -24,7 +24,7 @@ const Argv = require('yargs')
     .argv;
 
 const MotePath = `/mote/projects/${Argv.projectName}/${Argv.projectAspect}`;
-const PublicStaticPath = `/static/${BASE_PROJECT_NAME === Argv.projectName ? BASE_PROJECT_NAME : BASE_PROJECT_NAME + '/' + Argv.projectName + '/static'}/generated_statics/bundles/`;
+const PublicStaticPath = `/static/${BASE_PROJECT_NAME === Argv.projectName ? BASE_PROJECT_NAME : BASE_PROJECT_NAME + '/' + Argv.projectName}/generated_statics/bundles/`;
 
 console.log(PublicStaticPath);
 

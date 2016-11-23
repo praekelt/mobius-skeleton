@@ -52,7 +52,7 @@ exports.setupCSS = function(opts) {
             loaders: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: 'style!css!postcss!sass',
+                    loader: 'style!css?sourceMap!postcss!sass?sourceMap',
                     include: opts.include
                 }
             ]

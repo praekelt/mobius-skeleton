@@ -26,8 +26,6 @@ const Argv = require('yargs')
 const MotePath = `/mote/projects/${Argv.projectName}/${Argv.projectAspect}`;
 const PublicStaticPath = `/static/${BASE_PROJECT_NAME === Argv.projectName ? BASE_PROJECT_NAME : BASE_PROJECT_NAME + '/' + Argv.projectName}/generated_statics/bundles/`;
 
-console.log(PublicStaticPath);
-
 const ProjectPaths = {
     root: Path.join(__dirname, MotePath),
     src: Path.join(__dirname, MotePath + '/src'),

@@ -79,7 +79,6 @@ const BASE_CONFIG = {
             {
                 test: /\.scss$/,
                 loaders: ['postcss'],
-                exclude: ProjectPaths.src + '/tokens',
                 include: ProjectPaths.src
             }
         ]

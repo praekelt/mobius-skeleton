@@ -1,6 +1,8 @@
 // #############
 // SETUP
 
+const BASE_PROJECT_NAME = 'skeleton'; // @TODO Replace this with your Django project name.
+
 const
     Path = require('path'),
 
@@ -17,26 +19,28 @@ const
 // Set environment variables
 const LifecycleEvent = process.env.npm_lifecycle_event;
 const Argv = require('yargs')
-    .default('projectName', 'skeleton') // @TODO: Change this to your project's actual name.
+    .default('projectName', BASE_PROJECT_NAME)
     .default('projectAspect', 'website')
     .argv;
 
 const MotePath = `/mote/projects/${Argv.projectName}/${Argv.projectAspect}`;
-const DjangoStaticDir = `/${Argv.projectName}/static/${Argv.projectName}/`;
-const PublicStaticPath = `/static/${Argv.projectName}/generated_statics/bundles/`;
+const DjangoStaticDir = `/${BASE_PROJECT_NAME}/static/${BASE_PROJECT_NAME}/`;
+const PublicStaticPath = `/static/${BASE_PROJECT_NAME === Argv.projectName ? BASE_PROJECT_NAME : BASE_PROJECT_NAME + '/' + Argv.projectName + '/static'}/generated_statics/bundles/`;
+
+console.log(PublicStaticPath);
 
 const ProjectPaths = {
     root: Path.join(__dirname, MotePath),
     src: Path.join(__dirname, MotePath + '/src'),
-    dist: Path.join(__dirname, DjangoStaticDir + '/generated_statics/bundles')
+    dist: Path.join(__dirname, `${BASE_PROJECT_NAME}${PublicStaticPath}`)
 };
 
 function filenamePattern(prefix, ext) {
     return `${prefix}.[name].[chunkhash].${ext}`;
 }
 
-function bundlenamePattern(project, aspect) {
-    return `./${project}-bundlemap-${aspect}.json`;
+function bundlenamePattern(prefix) {
+    return `./${prefix}-bundlemap.json`;
 }
 
 
@@ -50,7 +54,7 @@ const BASE_CONFIG = {
     },
     output: {
         path: ProjectPaths.dist,
-        filename: filenamePattern(Argv.projectName, 'js'),
+        filename: filenamePattern(`${Argv.projectName}-${Argv.projectAspect}`, 'js'),
         publicPath: PublicStaticPath
     },
     resolve: {
@@ -127,7 +131,7 @@ function configBuilder(process, config) {
                 }),
                 Helpers.globSass(),
                 Helpers.extractCSS({
-                    filename: filenamePattern(Argv.projectName, 'css'),
+                    filename: filenamePattern(`${Argv.projectName}-${Argv.projectAspect}`, 'css'),
                     include: [
                         Path.join(__dirname, MotePath + '/src/styles.scss')
                     ],
@@ -136,7 +140,7 @@ function configBuilder(process, config) {
                 Helpers.minify(),
                 Helpers.trackBundles({
                     path: ProjectPaths.dist,
-                    filename: bundlenamePattern(Argv.projectName, Argv.projectAspect)
+                    filename: bundlenamePattern(`${Argv.projectName}-${Argv.projectAspect}`)
                 })
             );
             break;
@@ -187,10 +191,6 @@ function configBuilder(process, config) {
                     include: [
                         Path.join(__dirname, MotePath + '/src', 'styles.scss')
                     ]
-                }),
-                Helpers.trackBundles({
-                    path: ProjectPaths.dist,
-                    filename: bundlenamePattern(Argv.projectName, Argv.projectAspect)
                 })
             );
             break;

@@ -24,7 +24,6 @@ const Argv = require('yargs')
     .argv;
 
 const MotePath = `/mote/projects/${Argv.projectName}/${Argv.projectAspect}`;
-const DjangoStaticDir = `/${BASE_PROJECT_NAME}/static/${BASE_PROJECT_NAME}/`;
 const PublicStaticPath = `/static/${BASE_PROJECT_NAME === Argv.projectName ? BASE_PROJECT_NAME : BASE_PROJECT_NAME + '/' + Argv.projectName + '/static'}/generated_statics/bundles/`;
 
 console.log(PublicStaticPath);

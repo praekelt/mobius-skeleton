@@ -38,7 +38,7 @@ exports.extractCSS = function(opts) {
             loaders: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: ExtractTextPlugin.extract('style', 'css!postcss!sass'),
+                    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?sourceMap'),
                     include: opts.include
                 }
             ]
@@ -52,7 +52,7 @@ exports.setupCSS = function(opts) {
             loaders: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: 'style!css!postcss!sass',
+                    loader: 'style!css?sourceMap!postcss!sass?sourceMap',
                     include: opts.include
                 }
             ]

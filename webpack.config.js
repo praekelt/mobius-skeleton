@@ -187,6 +187,10 @@ function configBuilder(process, config) {
                     include: [
                         Path.join(__dirname, MotePath + '/src', 'styles.scss')
                     ]
+                }),
+                Helpers.trackBundles({
+                    path: ProjectPaths.dist,
+                    filename: bundlenamePattern(`${Argv.projectName}-${Argv.projectAspect}`)
                 })
             );
             break;

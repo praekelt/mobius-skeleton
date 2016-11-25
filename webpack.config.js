@@ -166,6 +166,7 @@ function configBuilder(process, config) {
                         ]
                     }
                 },
+                Helpers.dashboard(),
                 Helpers.devServer({
                     publicPath: BASE_CONFIG.output.publicPath
                 }),

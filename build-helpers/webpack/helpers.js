@@ -3,7 +3,8 @@ const
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     BundleTracker = require('webpack-bundle-tracker'),
-    StyleLint = require('stylelint-webpack-plugin');
+    StyleLint = require('stylelint-webpack-plugin'),
+    Dashboard = require('webpack-dashboard/plugin');
 
 exports.clean = function(path) {
     return {
@@ -11,6 +12,14 @@ exports.clean = function(path) {
             new CleanWebpackPlugin([path], {
                 root: process.cwd() //point to project
             })
+        ]
+    }
+}
+
+exports.dashboard = function() {
+    return {
+        plugins: [
+            new Dashboard()
         ]
     }
 }

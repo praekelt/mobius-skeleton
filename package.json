@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --colors --progress",
-    "build:dev": "NODE_ENV=development webpack-dev-server"
+    "build:dev": "NODE_ENV=development webpack-dashboard -- webpack-dev-server"
   },
   "author": "Chris Sergienko <chris@praekeltconsulting.com> (http://www.praekelt.com)",
   "license": "BSD-3-Clause",
@@ -36,6 +36,7 @@
     "stylelint-webpack-plugin": "^0.4.0",
     "webpack": "^1.13.2",
     "webpack-bundle-tracker": "0.0.93",
+    "webpack-dashboard": "^0.2.0",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^0.15.0",
     "webpack-validator": "^2.2.9",

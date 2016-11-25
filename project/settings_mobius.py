@@ -184,3 +184,17 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.dummy.DummyCache",
     }
 }
+
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": not DEBUG,
+        "BUNDLE_DIR_NAME": "skeleton/generated_statics/bundles/",
+        "STATS_FILE": os.path.join(BASE_DIR, "skeleton", "static",
+                                   "skeleton", "generated_statics",
+                                   "bundles",
+                                   "skeleton-website-bundlemap.json"),
+        "POLL_INTERVAL": 0.1,
+        "TIMEOUT": None,
+        "IGNORE": [".+\.hot-update.js", ".+\.map"]
+    }
+}

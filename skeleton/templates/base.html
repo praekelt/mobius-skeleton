@@ -1,5 +1,5 @@
 <!doctype html>
-{% if slots %}
+{% if composer_slots %}
     {% load composer_tags %}
 {% endif %}
 {% comment %}
@@ -9,28 +9,28 @@
 
 <body>
     <div id="headerslot">
-        {% if slots.header %}
+        {% if composer_slots.header %}
             {% composer header %}
         {% else %}
             Header slot: to populate this, add a header slot with url '/'
         {% endif %}
     </div>
-    <div id="contentslot"{% if not slots.sidebar %} class="wide"{% endif %}>
+    <div id="contentslot"{% if not composer_slots.sidebar %} class="wide"{% endif %}>
         {% block content %}
-        {% if slots.content %}
+        {% if composer_slots.content %}
             {% composer content %}
         {% else %}
             Content slot: to populate this, add a content slot with url '/'
         {% endif %}
         {% endblock %}
     </div>
-    {% if slots.sidebar %}
+    {% if composer_slots.sidebar %}
         <div id="sidebar">
             {% composer sidebar %}
         </div>
     {% endif %}
     <div id="footerslot">
-        {% if slots.footer %}
+        {% if composer_slots.footer %}
             {% composer footer %}
         {% else %}
             Footer slot: to populate this, add a footer slot with url '/'

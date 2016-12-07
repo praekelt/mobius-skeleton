@@ -20,7 +20,7 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
-    "ckeditor",
+    "crum",
     "django_comments",
     "likes",
     "link",
@@ -62,6 +62,7 @@ MIDDLEWARE_CLASSES = (
     "pagination.middleware.PaginationMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "crum.CurrentRequestUserMiddleware",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -128,8 +129,6 @@ REST_FRAMEWORK = {
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     ),
 }
-
-CKEDITOR_UPLOAD_PATH = expanduser("~")
 
 MEDIA_ROOT = "%s/media/" % BASE_DIR
 MEDIA_URL = "/media/"

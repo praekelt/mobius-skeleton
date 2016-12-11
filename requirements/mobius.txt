@@ -10,7 +10,8 @@
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 -e git+https://github.com/praekelt/django-ultracache.git#egg=django-ultracache
--e git+https://github.com/praekelt/jmbo-search.git@develop#egg=jmbo-search 
+-e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack
+-e git+https://github.com/praekelt/jmbo-search.git@develop#egg=jmbo-search
 
 Django>=1.9.6,<1.10
 django-category==1.9
@@ -47,3 +48,5 @@ celery==4.0.0
 raven==5.32.0
 kombu==4.0.0
 django-crum==0.7.1
+pysolr>=3.3.2
+urllib3>=1.19.1

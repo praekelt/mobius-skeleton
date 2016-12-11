@@ -20,6 +20,7 @@ INSTALLED_APPS = (
     # The order is important
     "skeleton",
     "mobius",
+    "search",
     "jmbo",
     "photologue",
     "category",
@@ -48,6 +49,7 @@ INSTALLED_APPS = (
 
     # These apps have no templates
     "celery",
+    "haystack",
     "layers",
     "raven.contrib.django.raven_compat",
     "rest_framework",
@@ -135,6 +137,12 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     ),
+}
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
 }
 
 MEDIA_ROOT = "%s/media/" % BASE_DIR

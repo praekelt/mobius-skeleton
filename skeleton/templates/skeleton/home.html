@@ -1,2 +1,20 @@
-{% extends 'base.html' %}
-I am home
+{% load mobius_tags %}
+{% load render_bundle from webpack_loader %}
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mobius Skeleton</title>
+
+    {% if_has_bundle "style" "css" %}
+        {% render_bundle "style" "css" %}
+    {% end_if_has_bundle %}
+</head>
+<body>
+    <h1>Mobius Skeleton</h1>
+
+    {% if_has_bundle "main" "js" %}
+        {% render_bundle "main" "js" %}
+    {% end_if_has_bundle %}
+</body>
+</html>

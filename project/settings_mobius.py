@@ -15,28 +15,30 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
+    # The order is important
     "mobius",
     "jmbo",
     "photologue",
     "category",
-    "ckeditor",
+    "crum",
     "django_comments",
     "likes",
     "link",
-    "layers",
     "listing",
+    "mote",
     "navbuilder",
     "formfactory",
     "secretballot",
     "pagination",
     "post",
     "preferences",
-    "ultracache",
     "sites_groups",
     "mote",
     "composer",
     # TODO: Remove nested_admin once the UI is built
     "nested_admin",
+
+    # Django apps can be alphabetic
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -44,8 +46,15 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # These apps have no templates
+    "celery",
+    "layers",
+    "raven.contrib.django.raven_compat",
     "rest_framework",
-    "rest_framework_extras"
+    "rest_framework_extras",
+    "ultracache",
+    "webpack_loader",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,6 +67,7 @@ MIDDLEWARE_CLASSES = (
     "composer.middleware.ComposerFallbackMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "crum.CurrentRequestUserMiddleware",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -126,7 +136,70 @@ REST_FRAMEWORK = {
     ),
 }
 
-CKEDITOR_UPLOAD_PATH = expanduser("~")
-
 MEDIA_ROOT = "%s/media/" % BASE_DIR
 MEDIA_URL = "/media/"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "filters": {
+         "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+         }
+     },
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "WARN",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose"
+        },
+        "sentry": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "raven.contrib.django.handlers.SentryHandler",
+        },
+    },
+    "loggers": {
+        "raven": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "sentry.errors": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": "WARN",
+            "propagate": False,
+        },
+    },
+}
+
+# Dummy cache is the default
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+    }
+}
+
+WEBPACK_LOADER = {
+    "DEFAULT": {
+        "CACHE": not DEBUG,
+        "BUNDLE_DIR_NAME": "skeleton/generated_statics/bundles/",
+        "STATS_FILE": os.path.join(BASE_DIR, "skeleton", "static",
+                                   "skeleton", "generated_statics",
+                                   "bundles",
+                                   "skeleton-website-bundlemap.json"),
+        "POLL_INTERVAL": 0.1,
+        "TIMEOUT": None,
+        "IGNORE": [".+\.hot-update.js", ".+\.map"]
+    }
+}

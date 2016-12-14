@@ -20,3 +20,4 @@ bower_components
 settings_local.py
 /dev.sh
 /tags
+**/static/**/generated_statics

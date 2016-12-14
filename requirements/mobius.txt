@@ -10,6 +10,7 @@
 -e git+git@github.com:praekelt/jmbo-composer.git@develop#egg=jmbo-composer
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
+-e git+https://github.com/praekelt/django-ultracache.git#egg=django-ultracache
 
 Django>=1.9.6,<1.10
 django-category==1.9
@@ -23,7 +24,6 @@ django-preferences==0.0.2
 #django-secretballot==0.5.0
 django-sites-groups==1.9.2
 django-sortedm2m==1.2.2
-django-ultracache==1.9.1
 ExifRead==2.1.2
 Pillow==3.2.0
 psycopg2==2.6.1
@@ -43,4 +43,8 @@ cached-property==1.2.0
 lxml==3.6.4
 django-webpack-loader==0.3.3
 django-layers-hr==1.9
+celery==4.0.0
+raven==5.32.0
+kombu==4.0.0
+django-crum==0.7.1
 django-nested-admin==3.0.12

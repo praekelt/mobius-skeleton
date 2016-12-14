@@ -17,27 +17,27 @@ TEMPLATE_DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
+    # The order is important
     "skeleton",
     "mobius",
     "jmbo",
     "photologue",
     "category",
-    "ckeditor",
+    "crum",
     "django_comments",
-    "layers",
     "likes",
     "link",
     "listing",
+    "mote",
     "navbuilder",
     "formfactory",
     "secretballot",
     "pagination",
     "post",
     "preferences",
-    "ultracache",
     "sites_groups",
-    "webpack_loader",
-    "mote",
+
+    # Django apps can be alphabetic
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -45,8 +45,15 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # These apps have no templates
+    "celery",
+    "layers",
+    "raven.contrib.django.raven_compat",
     "rest_framework",
-    "rest_framework_extras"
+    "rest_framework_extras",
+    "ultracache",
+    "webpack_loader",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     "pagination.middleware.PaginationMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "crum.CurrentRequestUserMiddleware",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = [
@@ -93,8 +101,12 @@ WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "test",
+        "USER": "postgres",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
     }
 }
 
@@ -125,10 +137,59 @@ REST_FRAMEWORK = {
     ),
 }
 
-CKEDITOR_UPLOAD_PATH = expanduser("~")
-
 MEDIA_ROOT = "%s/media/" % BASE_DIR
 MEDIA_URL = "/media/"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "filters": {
+         "require_debug_false": {
+            "()": "django.utils.log.RequireDebugFalse",
+         }
+     },
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "WARN",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose"
+        },
+        "sentry": {
+            "level": "ERROR",
+            "filters": ["require_debug_false"],
+            "class": "raven.contrib.django.handlers.SentryHandler",
+        },
+    },
+    "loggers": {
+        "raven": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "sentry.errors": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": True,
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": "WARN",
+            "propagate": False,
+        },
+    },
+}
+
+# Dummy cache is the default
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
+    }
+}
 
 WEBPACK_LOADER = {
     "DEFAULT": {

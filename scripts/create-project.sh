@@ -59,6 +59,7 @@ find ${PROJECT_DIR} -type f -exec sed -i s/SKELETON/${APP_UNDERSCORE_UPPER}/g {}
 find ${PROJECT_DIR} -type f \( ! -iname "setup.py" \) -exec sed -i s/skeleton/${APP_UNDERSCORE}/g {} +
 
 # Rename directories
+mv ${APP_DIR}/templates/search/indexes/skeleton ${APP_DIR}/templates/search/indexes/${APP_UNDERSCORE}
 mv ${APP_DIR}/templates/skeleton ${APP_DIR}/templates/${APP_UNDERSCORE}
 mv ${APP_DIR}/static/skeleton ${APP_DIR}/static/${APP_UNDERSCORE}
 

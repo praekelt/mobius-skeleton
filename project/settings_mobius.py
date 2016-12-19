@@ -20,7 +20,6 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
-    "crum",
     "django_comments",
     "likes",
     "link",
@@ -45,6 +44,7 @@ INSTALLED_APPS = (
 
     # These apps have no templates
     "celery",
+    "crum",
     "layers",
     "raven.contrib.django.raven_compat",
     "rest_framework",

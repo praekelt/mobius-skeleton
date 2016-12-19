@@ -10,6 +10,7 @@
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 -e git+https://github.com/praekelt/django-ultracache.git#egg=django-ultracache
+-e git+https://github.com/hedleyroos/django-layers.git#egg=django-layers-hr
 
 Django>=1.9.6,<1.10
 django-category==1.9
@@ -41,7 +42,6 @@ termcolor==1.1.0
 cached-property==1.2.0
 lxml==3.6.4
 django-webpack-loader==0.3.3
-django-layers-hr==1.9
 celery==4.0.0
 raven==5.32.0
 kombu==4.0.0

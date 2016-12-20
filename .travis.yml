@@ -2,6 +2,11 @@ sudo: false
 language: python
 cache: pip
 
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 env:
   - TOXENV=django19
 

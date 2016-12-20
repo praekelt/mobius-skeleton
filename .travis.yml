@@ -12,7 +12,6 @@ env:
 
 install:
   - nvm install
-  - npm install
   - npm run build
   - pip install tox
 

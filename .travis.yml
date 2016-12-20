@@ -6,6 +6,9 @@ env:
   - TOXENV=django19
 
 install:
+  - nvm install
+  - npm install
+  - npm run build
   - pip install tox
 
 script: tox

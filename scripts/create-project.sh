@@ -63,6 +63,7 @@ find ${PROJECT_DIR} -type f \( ! -iname "setup.py" \) -exec sed -i s/skeleton/${
 # Rename directories
 mv ${APP_DIR}/templates/skeleton ${APP_DIR}/templates/${APP_UNDERSCORE}
 mv ${APP_DIR}/static/skeleton ${APP_DIR}/static/${APP_UNDERSCORE}
+mv ${PROJECT_DIR}/mote/projects/skeleton ${PROJECT_DIR}/mote/projects/${APP_UNDERSCORE}
 
 # Set the secret key
 SECRET_KEY=`date +%s | sha256sum | head -c 56`

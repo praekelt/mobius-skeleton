@@ -46,6 +46,7 @@ touch ${PROJECT_DIR}/CHANGELOG.rst
 touch ${PROJECT_DIR}/README.rst
 cp -r project ${PROJECT_DIR}/
 cp -r requirements ${PROJECT_DIR}/
+cp -r mote ${PROJECT_DIR}/
 cp -r skeleton ${APP_DIR}
 
 # Delete pyc files

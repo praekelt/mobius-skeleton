@@ -12,8 +12,6 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
-
 INSTALLED_APPS = (
     # The order is important
     "mobius",

@@ -25,10 +25,11 @@ INSTALLED_APPS = (
     "mote",
     "navbuilder",
     "formfactory",
-    "secretballot",
     "pagination",
     "post",
     "preferences",
+    "secretballot",
+    "simplemde",
     "sites_groups",
 
     # Django apps can be alphabetic

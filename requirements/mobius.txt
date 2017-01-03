@@ -46,3 +46,4 @@ raven==5.32.0
 kombu==4.0.0
 django-crum==0.7.1
 django-layers-hr==1.10.0
+django-simplemde==0.0.9

@@ -32,6 +32,7 @@ INSTALLED_APPS = (
     "navbuilder",
     "formfactory",
     "secretballot",
+    "simplemde",
     "pagination",
     "post",
     "preferences",

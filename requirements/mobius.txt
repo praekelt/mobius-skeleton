@@ -1,3 +1,7 @@
+# This file contains a set of modules guaranteed to work together. You may
+# edit it if you have to change a version of a module. Add new modules in
+# requirements.txt.
+
 -e git+https://github.com/praekelt/jmbo.git@feature/django-1.9#egg=jmbo
 -e git+https://github.com/praekelt/djangorestframework-extras.git@develop#egg=djangorestframework-extras
 -e git+https://github.com/praekelt/jmbo-post.git@feature/django-1.9#egg=jmbo-post
@@ -25,7 +29,6 @@ django-sites-groups==1.9.2
 django-sortedm2m==1.2.2
 ExifRead==2.1.2
 Pillow==3.2.0
-psycopg2==2.6.1
 pytz==2016.4
 PyYAML==3.11
 requests==2.10.0
@@ -47,3 +50,4 @@ kombu==4.0.0
 django-crum==0.7.1
 django-layers-hr==1.10.0
 django-simplemde==0.0.9
+django-form-renderers==0.3

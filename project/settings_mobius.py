@@ -19,6 +19,7 @@ INSTALLED_APPS = (
     "photologue",
     "category",
     "django_comments",
+    "form_renderers",
     "likes",
     "link",
     "listing",

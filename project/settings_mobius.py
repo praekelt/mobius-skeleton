@@ -197,3 +197,5 @@ WEBPACK_LOADER = {
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+FORM_RENDERERS = {"enable-bem-classes": True}

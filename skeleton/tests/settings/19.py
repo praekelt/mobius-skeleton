@@ -207,3 +207,5 @@ WEBPACK_LOADER = {
     }
 }
 
+# Celery runs synchronously for tests
+CELERY_TASK_ALWAYS_EAGER = True

@@ -12,26 +12,25 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
-
 INSTALLED_APPS = (
     # The order is important
     "mobius",
     "jmbo",
     "photologue",
     "category",
-    "crum",
     "django_comments",
+    "form_renderers",
     "likes",
     "link",
     "listing",
     "mote",
     "navbuilder",
     "formfactory",
-    "secretballot",
     "pagination",
     "post",
     "preferences",
+    "secretballot",
+    "simplemde",
     "sites_groups",
     "mote",
     "composer",
@@ -49,6 +48,7 @@ INSTALLED_APPS = (
 
     # These apps have no templates
     "celery",
+    "crum",
     "layers",
     "raven.contrib.django.raven_compat",
     "rest_framework",
@@ -203,3 +203,5 @@ WEBPACK_LOADER = {
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+FORM_RENDERERS = {"enable-bem-classes": True}

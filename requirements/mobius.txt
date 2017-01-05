@@ -1,3 +1,7 @@
+# This file contains a set of modules guaranteed to work together. You may
+# edit it if you have to change a version of a module. Add new modules in
+# requirements.txt.
+
 -e git+https://github.com/praekelt/jmbo.git@feature/django-1.9#egg=jmbo
 -e git+https://github.com/praekelt/djangorestframework-extras.git@develop#egg=djangorestframework-extras
 -e git+https://github.com/praekelt/jmbo-post.git@feature/django-1.9#egg=jmbo-post
@@ -11,6 +15,7 @@
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 -e git+https://github.com/praekelt/django-ultracache.git#egg=django-ultracache
+-e git+https://github.com/praekelt/django-preferences.git#egg=django-preferences
 
 Django>=1.9.6,<1.10
 django-category==1.9
@@ -20,13 +25,11 @@ django-export==1.9
 django-object-tools==1.9
 django-pagination-fork==1.0.17
 django-photologue==3.5.1
-django-preferences==0.0.2
 #django-secretballot==0.5.0
 django-sites-groups==1.9.2
 django-sortedm2m==1.2.2
 ExifRead==2.1.2
 Pillow==3.2.0
-psycopg2==2.6.1
 pytz==2016.4
 PyYAML==3.11
 requests==2.10.0
@@ -42,9 +45,11 @@ termcolor==1.1.0
 cached-property==1.2.0
 lxml==3.6.4
 django-webpack-loader==0.3.3
-django-layers-hr==1.9
 celery==4.0.0
 raven==5.32.0
 kombu==4.0.0
 django-crum==0.7.1
 django-nested-admin==3.0.12
+django-layers-hr==1.10.0
+django-simplemde==0.0.9
+django-form-renderers==0.3

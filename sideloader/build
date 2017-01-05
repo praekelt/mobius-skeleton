@@ -1,0 +1,12 @@
+#!/bin/bash
+
+pushd $REPO
+source ~/.nvm/nvm.sh
+nvm install
+npm install
+npm run build
+popd
+
+cp -a $REPO ./build/
+
+${PIP} install -r $REPO/requirements/requirements.txt

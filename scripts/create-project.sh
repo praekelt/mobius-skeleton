@@ -41,11 +41,15 @@ cp package.json ${PROJECT_DIR}/
 cp .stylelintrc ${PROJECT_DIR}/
 cp webpack.config.js ${PROJECT_DIR}/
 cp yarn.lock ${PROJECT_DIR}/
+cp .sideloader.yml ${PROJECT_DIR}/
 touch ${PROJECT_DIR}/AUTHORS.rst
 touch ${PROJECT_DIR}/CHANGELOG.rst
 touch ${PROJECT_DIR}/README.rst
 cp -r project ${PROJECT_DIR}/
 cp -r requirements ${PROJECT_DIR}/
+cp -r mote ${PROJECT_DIR}/
+cp -r build-helpers ${PROJECT_DIR}/
+cp -r sideloader ${PROJECT_DIR}
 cp -r skeleton ${APP_DIR}
 
 # Delete pyc files
@@ -61,6 +65,7 @@ find ${PROJECT_DIR} -type f \( ! -iname "setup.py" \) -exec sed -i s/skeleton/${
 # Rename directories
 mv ${APP_DIR}/templates/skeleton ${APP_DIR}/templates/${APP_UNDERSCORE}
 mv ${APP_DIR}/static/skeleton ${APP_DIR}/static/${APP_UNDERSCORE}
+mv ${PROJECT_DIR}/mote/projects/skeleton ${PROJECT_DIR}/mote/projects/${APP_UNDERSCORE}
 
 # Set the secret key
 SECRET_KEY=`date +%s | sha256sum | head -c 56`

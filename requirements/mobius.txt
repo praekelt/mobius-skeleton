@@ -15,6 +15,7 @@ Django>=1.9.6,<1.10
 django-category==1.9
 django-contrib-comments==1.7.1
 django-export==1.9
+django-formtools==1.0
 #django-likes==0.2
 django-object-tools==1.9
 django-pagination-fork==1.0.17

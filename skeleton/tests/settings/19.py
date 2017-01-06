@@ -28,7 +28,6 @@ INSTALLED_APPS = (
     "likes",
     "link",
     "listing",
-    "mote",
     "navbuilder",
     "formfactory",
     "pagination",

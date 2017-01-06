@@ -21,6 +21,7 @@ INSTALLED_APPS = (
     "photologue",
     "category",
     "django_comments",
+    "formtools",
     "likes",
     "link",
     "listing",
@@ -32,7 +33,6 @@ INSTALLED_APPS = (
     "post",
     "preferences",
     "sites_groups",
-    "formtools",
 
     # Django apps can be alphabetic
     "django.contrib.admin",

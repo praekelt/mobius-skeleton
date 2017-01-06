@@ -23,7 +23,6 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
-    "crum",
     "django_comments",
     "form_renderers",
     "likes",
@@ -32,12 +31,16 @@ INSTALLED_APPS = (
     "mote",
     "navbuilder",
     "formfactory",
-    "secretballot",
-    "simplemde",
     "pagination",
     "post",
     "preferences",
+    "secretballot",
+    "simplemde",
     "sites_groups",
+    "mote",
+    "composer",
+    # TODO: Remove nested_admin once the UI is built
+    "nested_admin",
 
     # Django apps can be alphabetic
     "django.contrib.admin",
@@ -50,6 +53,7 @@ INSTALLED_APPS = (
 
     # These apps have no templates
     "celery",
+    "crum",
     "layers",
     "raven.contrib.django.raven_compat",
     "rest_framework",
@@ -65,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "pagination.middleware.PaginationMiddleware",
+    "composer.middleware.ComposerFallbackMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "crum.CurrentRequestUserMiddleware",
@@ -79,6 +84,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
+    "composer.context_processors.slots",
 ]
 
 TEMPLATES = [

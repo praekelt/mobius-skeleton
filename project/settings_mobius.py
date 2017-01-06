@@ -20,6 +20,7 @@ INSTALLED_APPS = (
     "category",
     "django_comments",
     "form_renderers",
+    "formtools",
     "likes",
     "link",
     "listing",

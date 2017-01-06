@@ -26,6 +26,7 @@ INSTALLED_APPS = (
     "crum",
     "django_comments",
     "form_renderers",
+    "formtools",
     "likes",
     "link",
     "listing",

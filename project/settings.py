@@ -1,13 +1,16 @@
 from project.settings_mobius import *
 
 
-# Out app must be first
+# Our app must be first
 INSTALLED_APPS = list(INSTALLED_APPS)
 INSTALLED_APPS = ["skeleton"] + INSTALLED_APPS
 
 # Configuration for our app
 SKELETON = {
 }
+
+# The default value of ALLOWED_HOSTS gets in the way, so change
+ALLOWED_HOSTS = ["*"]
 
 # Typically used in actual deploys
 try:

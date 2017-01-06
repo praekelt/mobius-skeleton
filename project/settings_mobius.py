@@ -12,8 +12,6 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
-
 INSTALLED_APPS = (
     # The order is important
     "mobius",
@@ -21,6 +19,7 @@ INSTALLED_APPS = (
     "photologue",
     "category",
     "django_comments",
+    "form_renderers",
     "formtools",
     "likes",
     "link",
@@ -28,10 +27,11 @@ INSTALLED_APPS = (
     "mote",
     "navbuilder",
     "formfactory",
-    "secretballot",
     "pagination",
     "post",
     "preferences",
+    "secretballot",
+    "simplemde",
     "sites_groups",
 
     # Django apps can be alphabetic
@@ -75,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
+    "preferences.context_processors.preferences_cp"
 ]
 
 TEMPLATES = [
@@ -198,3 +199,5 @@ WEBPACK_LOADER = {
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+FORM_RENDERERS = {"enable-bem-classes": True}

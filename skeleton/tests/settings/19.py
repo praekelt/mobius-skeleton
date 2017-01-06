@@ -196,10 +196,16 @@ CACHES = {
 WEBPACK_LOADER = {
     "DEFAULT": {
         "CACHE": not DEBUG,
-        "BUNDLE_DIR_NAME": "skeleton/bundles/",
-        "STATS_FILE": os.path.join(BASE_DIR, "static", "skeleton", "bundles", "skeleton-bundlemap-website-prod.json"),
+        "BUNDLE_DIR_NAME": "skeleton/generated_statics/bundles/",
+        "STATS_FILE": os.path.join(BASE_DIR, "static",
+                                   "skeleton", "generated_statics",
+                                   "bundles",
+                                   "skeleton-website-bundlemap.json"),
         "POLL_INTERVAL": 0.1,
         "TIMEOUT": None,
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+# Celery runs synchronously for tests
+CELERY_TASK_ALWAYS_EAGER = True

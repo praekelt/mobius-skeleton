@@ -3,8 +3,6 @@ include CHANGELOG.rst
 include LICENSE
 include README.rst
 include setup-development.sh
+recursive-include mote *
 recursive-include scripts *
-recursive-include skeleton/static *
-recursive-include skeleton/fixtures *
-recursive-include skeleton/migrations *
-recursive-include skeleton/management *
+recursive-include skeleton *

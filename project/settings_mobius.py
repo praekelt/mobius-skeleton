@@ -23,6 +23,7 @@ INSTALLED_APPS = (
     "likes",
     "link",
     "listing",
+    "mote",
     "navbuilder",
     "formfactory",
     "pagination",
@@ -31,7 +32,6 @@ INSTALLED_APPS = (
     "secretballot",
     "simplemde",
     "sites_groups",
-    "mote",
     "composer",
     # TODO: Remove nested_admin once the UI is built
     "nested_admin",

@@ -40,7 +40,6 @@ gunicorn==19.6.0
 ujson==1.35
 python-memcached==1.53
 beautifulsoup4==4.4.1
-ujson==1.35
 termcolor==1.1.0
 cached-property==1.2.0
 lxml==3.6.4

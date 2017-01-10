@@ -11,7 +11,7 @@
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 -e git+https://github.com/praekelt/django-ultracache.git#egg=django-ultracache
 -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack
--e git+https://github.com/praekelt/jmbo-search.git@develop#egg=jmbo-search
+-e git+https://github.com/praekelt/jmbo-search.git@feature/custom-search-view#egg=jmbo-search
 
 Django>=1.9.6,<1.10
 django-category==1.9
@@ -43,7 +43,7 @@ termcolor==1.1.0
 cached-property==1.2.0
 lxml==3.6.4
 django-webpack-loader==0.3.3
-django-layers-hr==1.9
+django-layers-hr==1.10.0
 celery==4.0.0
 raven==5.32.0
 kombu==4.0.0

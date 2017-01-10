@@ -3,7 +3,6 @@
 import os
 from os.path import expanduser
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = "SECRET_KEY_PLACEHOLDER"
@@ -133,15 +132,9 @@ REST_FRAMEWORK = {
 }
 
 HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr',
-        #'EXCLUDED_INDEXES': ["search.search_indexes.ModelBaseIndex"],
-        # ...or for multicore...
-        # 'URL': 'http://127.0.0.1:8983/solr/mysite',
-    },
-    'simple': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    "default": {
+        "ENGINE": "haystack.backends.solr_backend.SolrEngine",
+        "URL": "http://127.0.0.1:8983/solr",
     },
 }
 
@@ -152,10 +145,10 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
     "filters": {
-         "require_debug_false": {
+        "require_debug_false": {
             "()": "django.utils.log.RequireDebugFalse",
-         }
-     },
+        }
+    },
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s"

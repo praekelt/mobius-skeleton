@@ -101,6 +101,14 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+    },
+    "postgres": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "skeleton",
+        "USER": "postgres",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "",
     }
 }
 
@@ -129,13 +137,6 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
     ),
-}
-
-HAYSTACK_CONNECTIONS = {
-    "default": {
-        "ENGINE": "haystack.backends.solr_backend.SolrEngine",
-        "URL": "http://127.0.0.1:8983/solr",
-    },
 }
 
 MEDIA_ROOT = "%s/media/" % BASE_DIR
@@ -205,3 +206,25 @@ WEBPACK_LOADER = {
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+#Haystack config
+HAYSTACK_CONNECTIONS = {
+    "default": {
+        "ENGINE": "haystack.backends.solr_backend.SolrEngine",
+        "URL": "http://127.0.0.1:8983/solr",
+    },
+}
+HAYSTACK_DEFAULT_OPERATOR = "OR"
+HAYSTACK_SIGNAL_PROCESSOR = "search.signals.ModelBaseSignalProcessor"
+
+# Celery config
+# rabbitmq
+BROKER_URL = "amqp://user:password@127.0.0.1:5672//"
+BROKER_TRANSPORT = "amqp://user:password@127.0.0.1:5672//"
+CELERY_RESULT_BACKEND = "amqp://user:password@127.0.0.1:5672//"
+# general
+CELERY_ACCEPT_CONTENT = ["application/json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "Africa/Nairobi"
+

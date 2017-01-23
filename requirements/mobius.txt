@@ -11,7 +11,7 @@
 -e git+https://github.com/praekelt/mote.git@develop#egg=mote
 -e git+https://github.com/praekelt/django-ultracache.git#egg=django-ultracache
 -e git+https://github.com/toastdriven/django-haystack.git@master#egg=django-haystack
--e git+https://github.com/praekelt/jmbo-search.git@feature/custom-search-view#egg=jmbo-search
+-e git+https://github.com/praekelt/jmbo-search.git@develop#egg=jmbo-search
 
 Django>=1.9.6,<1.10
 django-category==1.9

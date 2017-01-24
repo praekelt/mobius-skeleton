@@ -18,8 +18,10 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
+    "composer",
     "django_comments",
     "form_renderers",
+    "formtools",
     "likes",
     "link",
     "listing",
@@ -32,7 +34,7 @@ INSTALLED_APPS = (
     "secretballot",
     "simplemde",
     "sites_groups",
-    "composer",
+
     # TODO: Remove nested_admin once the UI is built
     "nested_admin",
 
@@ -79,6 +81,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
     "composer.context_processors.slots",
+    "preferences.context_processors.preferences_cp"
 ]
 
 TEMPLATES = [

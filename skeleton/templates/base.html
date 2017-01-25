@@ -8,14 +8,14 @@
 {% endcomment %}
 
 <body>
-    <div id="headerslot">
+    <div id="header">
         {% if composer_slots.header %}
             {% composer header %}
         {% else %}
             Header slot: to populate this, add a header slot with url '/'
         {% endif %}
     </div>
-    <div id="contentslot"{% if not composer_slots.sidebar %} class="wide"{% endif %}>
+    <div id="content"{% if not composer_slots.sidebar %} class="wide"{% endif %}>
         {% block content %}
         {% if composer_slots.content %}
             {% composer content %}
@@ -29,7 +29,7 @@
             {% composer sidebar %}
         </div>
     {% endif %}
-    <div id="footerslot">
+    <div id="footer">
         {% if composer_slots.footer %}
             {% composer footer %}
         {% else %}

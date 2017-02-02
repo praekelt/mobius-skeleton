@@ -35,7 +35,7 @@ django-crum==0.7.1
 django-export==1.9
 django-form-renderers==0.3
 django-formtools==1.0
-django-layers-hr==1.10.0
+django-layers-hr==1.10.1
 django-nested-admin==3.0.12
 django-object-tools==1.9
 django-pagination-fork==1.0.17

@@ -122,6 +122,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
+STATIC_ROOT=  "/static/"
 
 SITE_ID = 1
 
@@ -207,3 +208,9 @@ WEBPACK_LOADER = {
 }
 
 FORM_RENDERERS = {"enable-bem-classes": True}
+
+# The default layers config has basic -> web
+LAYERS = {"tree": ["basic", ["web"]]}
+
+# The default value of ALLOWED_HOSTS gets in the way, so change
+ALLOWED_HOSTS = ["*"]

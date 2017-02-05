@@ -20,3 +20,12 @@ else:
         lcl = locals()
         di = settings_local.configure(**locals())
         lcl.update(**di)
+
+# Use a cached template loader if not in debug mode
+if DEBUG:
+    loaders = TEMPLATES[0]["OPTIONS"]["loaders"]
+    TEMPLATES[0]["OPTIONS"]["loaders"] = \
+        [("django.template.loaders.cached.Loader", loaders)]
+
+# settings_local probably changes the value of DEBUG, so put all code dependent
+# on the DEBUG value below this comment.

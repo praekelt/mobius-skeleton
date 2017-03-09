@@ -23,19 +23,24 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
-    "crum",
     "django_comments",
+    "form_renderers",
+    "formtools",
     "likes",
     "link",
     "listing",
     "mote",
     "navbuilder",
     "formfactory",
-    "secretballot",
     "pagination",
     "post",
     "preferences",
+    "secretballot",
+    "simplemde",
     "sites_groups",
+    "composer",
+    # TODO: Remove nested_admin once the UI is built
+    "nested_admin",
 
     # Django apps can be alphabetic
     "django.contrib.admin",
@@ -48,6 +53,7 @@ INSTALLED_APPS = (
 
     # These apps have no templates
     "celery",
+    "crum",
     "layers",
     "raven.contrib.django.raven_compat",
     "rest_framework",
@@ -63,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "pagination.middleware.PaginationMiddleware",
+    "composer.middleware.ComposerFallbackMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "crum.CurrentRequestUserMiddleware",
@@ -77,6 +84,7 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
+    "composer.context_processors.slots",
 ]
 
 TEMPLATES = [
@@ -194,10 +202,16 @@ CACHES = {
 WEBPACK_LOADER = {
     "DEFAULT": {
         "CACHE": not DEBUG,
-        "BUNDLE_DIR_NAME": "skeleton/bundles/",
-        "STATS_FILE": os.path.join(BASE_DIR, "static", "skeleton", "bundles", "skeleton-bundlemap-website-prod.json"),
+        "BUNDLE_DIR_NAME": "skeleton/generated_statics/bundles/",
+        "STATS_FILE": os.path.join(BASE_DIR, "static",
+                                   "skeleton", "generated_statics",
+                                   "bundles",
+                                   "skeleton-website-bundlemap.json"),
         "POLL_INTERVAL": 0.1,
         "TIMEOUT": None,
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+# Celery runs synchronously for tests
+CELERY_TASK_ALWAYS_EAGER = True

@@ -15,6 +15,7 @@ virtualenv ${VENV}
 ./${VENV}/bin/pip install -r requirements/requirements.txt
 ./${VENV}/bin/python manage.py migrate
 ./${VENV}/bin/python manage.py load_photosizes
+./${VENV}/bin/python manage.py load_layers
 ./${VENV}/bin/python manage.py createsuperuser
 
 echo "You may now start up the site with ./${VENV}/bin/python manage.py runserver 0.0.0.0:8000"

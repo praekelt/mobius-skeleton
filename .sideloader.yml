@@ -1,0 +1,10 @@
+buildscript: sideloader/build
+postinstall: sideloader/postinstall.sh
+pip:
+  - psycopg2
+dependencies:
+  - nginx
+  - postgresql-server-dev-all
+  - postgresql
+  - libjpeg8
+  - libjpeg8-dev

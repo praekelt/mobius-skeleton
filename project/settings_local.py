@@ -3,10 +3,9 @@ import raven
 
 
 # Declare or redeclare variables here
-ALLOWED_HOSTS = ["*"]
 FOOFOO = 1
 
-# You should redifine the CACHE setting here
+# You should redefine the CACHE setting here
 
 # Configure raven
 RAVEN_CONFIG = {

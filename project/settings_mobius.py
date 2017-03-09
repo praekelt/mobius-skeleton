@@ -12,27 +12,31 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
-
 INSTALLED_APPS = (
     # The order is important
     "mobius",
     "jmbo",
     "photologue",
     "category",
-    "crum",
+    "composer",
     "django_comments",
+    "form_renderers",
+    "formtools",
     "likes",
     "link",
     "listing",
     "mote",
     "navbuilder",
     "formfactory",
-    "secretballot",
     "pagination",
     "post",
     "preferences",
+    "secretballot",
+    "simplemde",
     "sites_groups",
+
+    # TODO: Remove nested_admin once the UI is built
+    "nested_admin",
 
     # Django apps can be alphabetic
     "django.contrib.admin",
@@ -45,6 +49,7 @@ INSTALLED_APPS = (
 
     # These apps have no templates
     "celery",
+    "crum",
     "layers",
     "raven.contrib.django.raven_compat",
     "rest_framework",
@@ -60,6 +65,7 @@ MIDDLEWARE_CLASSES = (
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "pagination.middleware.PaginationMiddleware",
+    "composer.middleware.ComposerFallbackMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "crum.CurrentRequestUserMiddleware",
@@ -74,6 +80,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
+    "composer.context_processors.slots",
+    "preferences.context_processors.preferences_cp"
 ]
 
 TEMPLATES = [
@@ -82,7 +90,18 @@ TEMPLATES = [
         "DIRS": [],
         "APP_DIRS": False,
         "OPTIONS": {
-            "context_processors": TEMPLATE_CONTEXT_PROCESSORS,
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.core.context_processors.debug",
+                "django.core.context_processors.i18n",
+                "django.core.context_processors.media",
+                "django.core.context_processors.static",
+                "django.core.context_processors.tz",
+                "django.core.context_processors.request",
+                "django.contrib.messages.context_processors.messages",
+                "composer.context_processors.slots",
+                "preferences.context_processors.preferences_cp"
+            ],
             "loaders": [
                 "django.template.loaders.filesystem.Loader",
                 "mote.loaders.app_directories.Loader",
@@ -114,6 +133,7 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
+STATIC_ROOT=  "/static/"
 
 SITE_ID = 1
 
@@ -197,3 +217,11 @@ WEBPACK_LOADER = {
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }
+
+FORM_RENDERERS = {"enable-bem-classes": True}
+
+# The default layers config has basic -> web
+LAYERS = {"tree": ["basic", ["web"]]}
+
+# The default value of ALLOWED_HOSTS gets in the way, so change
+ALLOWED_HOSTS = ["*"]

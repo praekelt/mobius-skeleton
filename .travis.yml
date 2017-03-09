@@ -3,7 +3,7 @@ language: python
 cache: pip
 
 env:
-  - TOXENV=django19
+  - TOXENV=django19-travis
 
 install:
   - pip install tox

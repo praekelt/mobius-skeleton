@@ -6,7 +6,7 @@ const
     StyleLint = require('stylelint-webpack-plugin'),
     Dashboard = require('webpack-dashboard/plugin');
 
-exports.clean = function(path) {
+exports.clean = function (path) {
     return {
         plugins: [
             new CleanWebpackPlugin([path], {
@@ -16,7 +16,7 @@ exports.clean = function(path) {
     }
 }
 
-exports.dashboard = function() {
+exports.dashboard = function () {
     return {
         plugins: [
             new Dashboard()
@@ -24,7 +24,7 @@ exports.dashboard = function() {
     }
 }
 
-exports.globSass = function() {
+exports.globSass = function () {
     return {
         module: {
             preLoaders: [{
@@ -35,7 +35,7 @@ exports.globSass = function() {
     }
 }
 
-exports.extractCSS = function(opts) {
+exports.extractCSS = function (opts) {
     console.log(opts.include[0]);
 
     return {
@@ -55,7 +55,7 @@ exports.extractCSS = function(opts) {
     }
 }
 
-exports.setupCSS = function(opts) {
+exports.setupCSS = function (opts) {
     return {
         module: {
             loaders: [
@@ -69,7 +69,7 @@ exports.setupCSS = function(opts) {
     }
 }
 
-exports.lintCSS = function(opts) {
+exports.lintCSS = function (opts) {
     return {
         plugins: [
             new StyleLint({
@@ -82,7 +82,7 @@ exports.lintCSS = function(opts) {
     }
 }
 
-exports.setupJS = function(paths) {
+exports.setupJS = function (paths) {
     return {
         module: {
             loaders: [
@@ -101,7 +101,7 @@ exports.setupJS = function(paths) {
     }
 }
 
-exports.minify = function() {
+exports.minify = function () {
     /* eslint-disable camelcase  */
     /* Disabled due to drop_console key throwing error. */
     return {
@@ -120,7 +120,7 @@ exports.minify = function() {
     /* eslint-enable */
 }
 
-exports.setFreeVariable = function(key, value) {
+exports.setFreeVariable = function (key, value) {
     const env = {};
 
     env[key] = JSON.stringify(value);
@@ -132,7 +132,7 @@ exports.setFreeVariable = function(key, value) {
     };
 }
 
-exports.extractBundle = function(options) {
+exports.extractBundle = function (options) {
     const entry = {};
 
     entry[options.name] = options.entries;
@@ -149,7 +149,7 @@ exports.extractBundle = function(options) {
     };
 }
 
-exports.trackBundles = function(opts) {
+exports.trackBundles = function (opts) {
     return {
         plugins: [
             new BundleTracker(opts)
@@ -157,7 +157,7 @@ exports.trackBundles = function(opts) {
     }
 }
 
-exports.devServer = function(opts) {
+exports.devServer = function (opts) {
     return {
         devServer: {
             publicPath: opts.publicPath,

@@ -3,14 +3,14 @@ import raven
 
 
 # Declare or redeclare variables here
-ALLOWED_HOSTS = ["*"]
 FOOFOO = 1
 
-# You should redifine the CACHE setting here
+# You should redefine the CACHE setting here
 
-# Configure raven
+# Configure raven. Set "dsn" to None for your development environment.
 RAVEN_CONFIG = {
-    "dsn": "https://<key>:<secret>@sentry.io/<project>",
+    "dsn": None
+#    "dsn": "https://<key>:<secret>@sentry.io/<project>",
 }
 
 

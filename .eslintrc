@@ -34,7 +34,7 @@
     },
 
     "rules": {
-        "quotes": ["error", "single"],
+        "quotes": ["error", "single", { "avoidEscape": true }],
         "strict": ["error", "global"],
         "require-jsdoc": [0],
         "valid-jsdoc": [0],

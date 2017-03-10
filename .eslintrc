@@ -51,7 +51,6 @@
         "keyword-spacing": ["error"],
         "space-in-parens": ["error", "never"],
         "no-mixed-spaces-and-tabs": ["error"],
-        "eqeqeq": ["error", "smart"],
         "quote-props": ["error", "consistent", { "keywords": true, "unnecessary": false }]
     }
 }

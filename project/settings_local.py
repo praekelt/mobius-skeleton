@@ -7,9 +7,9 @@ FOOFOO = 1
 
 # You should redefine the CACHE setting here
 
-# Configure raven
+# Configure raven. Keep "dsn" commented in your development environment.
 RAVEN_CONFIG = {
-    "dsn": "https://<key>:<secret>@sentry.io/<project>",
+#    "dsn": "https://<key>:<secret>@sentry.io/<project>",
 }
 
 

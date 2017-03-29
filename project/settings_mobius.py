@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     "django.contrib.staticfiles",
 
     # These apps have no templates
+    "cache_headers",
     "celery",
     "crum",
     "layers",
@@ -59,6 +60,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    "cache_headers.middleware.CacheHeadersMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

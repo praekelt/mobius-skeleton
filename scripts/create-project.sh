@@ -41,7 +41,7 @@ cp package.json ${PROJECT_DIR}/
 cp .stylelintrc ${PROJECT_DIR}/
 cp webpack.config.js ${PROJECT_DIR}/
 cp yarn.lock ${PROJECT_DIR}/
-cp .sideloader.yml ${PROJECT_DIR}/
+cp Dockerfile ${PROJECT_DIR}/
 cp .deviceproxy.yml ${PROJECT_DIR}/
 touch ${PROJECT_DIR}/AUTHORS.rst
 touch ${PROJECT_DIR}/CHANGELOG.rst
@@ -58,6 +58,7 @@ find ${PROJECT_DIR} -name "*.pyc" | xargs rm
 
 # Change strings in the newly copied source
 sed -i s/name=\"mobius-skeleton\"/name=\"${APP}\"/ ${PROJECT_DIR}/setup.py
+sed -ie s/mobius-skeleton/${APP}/ ${PROJECT_DIR}/project/settings.py
 
 # Replace the word skeleton with the app name, taking care to exclude some files
 find ${PROJECT_DIR} -type f -exec sed -i s/SKELETON/${APP_UNDERSCORE_UPPER}/g {} +

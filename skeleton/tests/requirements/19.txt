@@ -34,7 +34,7 @@ django-cache-headers==0.1
 django-category==1.9
 django-contrib-comments==1.7.1
 django-crum==0.7.1
-django-export==1.9
+django-export==1.9.2
 django-form-renderers==0.3
 django-formtools==1.0
 django-layers-hr==1.10.1

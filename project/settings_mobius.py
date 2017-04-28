@@ -215,7 +215,7 @@ WEBPACK_LOADER = {
                                    "bundles",
                                    "skeleton-website-bundlemap.json"),
         "POLL_INTERVAL": 0.1,
-        "TIMEOUT": None,
+        "TIMEOUT": 60,
         "IGNORE": [".+\.hot-update.js", ".+\.map"]
     }
 }

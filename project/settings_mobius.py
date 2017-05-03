@@ -10,8 +10,6 @@ SECRET_KEY = "SECRET_KEY_PLACEHOLDER"
 
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 INSTALLED_APPS = (
     # The order is important
     "mobius",

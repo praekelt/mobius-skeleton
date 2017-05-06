@@ -7,7 +7,7 @@
 -e git+https://github.com/praekelt/jmbo-post.git@feature/django-1.9#egg=jmbo-post
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 
-Django>=1.9.6,<1.10
+Django>=1.10,<1.11
 psycopg2==2.6.1
 
 amqp==2.1.4

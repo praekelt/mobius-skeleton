@@ -27,7 +27,7 @@ django-category==1.9
 django-contrib-comments==1.7.1
 django-crum==0.7.1
 django-export==1.9.2
-django-form-renderers==0.3
+django-form-renderers==0.3.2
 django-formtools==1.0
 django-layers-hr==1.10.1
 django-likes==1.11
@@ -37,7 +37,7 @@ django-pagination-fork==1.0.17
 django-photologue==3.5.1
 django-secretballot==0.6.0
 django-simplemde==0.0.9
-django-sites-groups==1.9.2
+django-sites-groups==1.11.0
 django-sortedm2m==1.2.2
 django-ultracache==1.10.2
 django-webpack-loader==0.3.3

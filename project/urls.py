@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.static import serve
 
 import rest_framework_extras
 from rest_framework_jwt.views import obtain_jwt_token
@@ -52,7 +53,8 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += [
         url(
-            r"^media/(?P<path>.*)$", "django.views.static.serve",
+            r"^media/(?P<path>.*)$",
+            serve,
             {"document_root": settings.MEDIA_ROOT, "show_indexes": True}
         ),
     ]

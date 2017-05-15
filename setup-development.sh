@@ -18,6 +18,11 @@ virtualenv ${VENV}
 ./${VENV}/bin/python manage.py load_layers
 ./${VENV}/bin/python manage.py createsuperuser
 
+echo "Setting up nvm and npm."
+nvm install
+npm install
+npm run build
+
 echo "You may now start up the site with ./${VENV}/bin/python manage.py runserver 0.0.0.0:8000"
 echo "Browse to http://localhost:8000/ for the public site."
 echo "Browse to http://localhost:8000/admin/ for the admin interface."

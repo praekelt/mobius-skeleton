@@ -22,7 +22,7 @@ else:
         lcl.update(**di)
 
 # Use a cached template loader if not in debug mode
-if DEBUG:
+if not DEBUG:
     loaders = TEMPLATES[0]["OPTIONS"]["loaders"]
     TEMPLATES[0]["OPTIONS"]["loaders"] = \
         [("django.template.loaders.cached.Loader", loaders)]

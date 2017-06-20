@@ -51,6 +51,7 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # Host our own media
     urlpatterns += [
         url(
             r"^media/(?P<path>.*)$",
@@ -58,3 +59,11 @@ if settings.DEBUG:
             {"document_root": settings.MEDIA_ROOT, "show_indexes": True}
         ),
     ]
+    # Expose Django Debug Toolbar if we can import it
+    try:
+        import debug_toolbar
+        urlpatterns += [
+            url(r"^__debug__/", include(debug_toolbar.urls)),
+        ]
+    except ImportError:
+        pass

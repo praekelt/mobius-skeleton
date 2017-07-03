@@ -4,6 +4,8 @@ cache: pip
 
 env:
   - TOXENV=django19-travis
+  - TOXENV=django110-travis
+  - TOXENV=django111-travis
 
 install:
   - pip install tox

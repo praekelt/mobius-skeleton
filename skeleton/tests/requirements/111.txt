@@ -3,7 +3,6 @@
 -e git+https://github.com/praekelt/django-link.git@develop#egg=django-link
 -e git+https://github.com/praekelt/django-navbuilder.git@develop#egg=django-navbuilder
 -e git+https://github.com/praekelt/django-preferences.git#egg=django-preferences
--e git+https://github.com/praekelt/jmbo-post.git@feature/django-1.9#egg=jmbo-post
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 
 Django>=1.11,<1.12
@@ -11,41 +10,39 @@ psycopg2==2.6.1
 
 amqp==2.1.4
 appdirs==1.4.0
-BeautifulSoup==3.2.1
 beautifulsoup4==4.4.1
 billiard==3.5.0.2
-bs4==0.0.1
-cached-property==1.2.0
 celery==4.0.0
 contextlib2==0.5.4
-django-cache-headers==0.1.3
-django-category==1.9
+django-cache-headers>=0.2,<0.3
+django-category>=1.9,<2.0
 django-contrib-comments==1.7.1
 django-crum==0.7.1
 django-export==1.9.2
 django-form-renderers==0.3.2
 django-formtools==2.0
 django-layers-hr==1.11.0
-django-likes==1.11
-django-object-tools==1.9
+django-likes>=1.11,<2.0
+django-object-tools>=1.9,<2.0
 django-pagination-fork==1.0.17
 django-photologue==3.5.1
 django-secretballot==0.6.0
 django-simplemde==0.0.9
-django-sites-groups==1.11.1
+django-sites-groups>=1.11.1,<2.0
 django-sortedm2m==1.2.2
-django-ultracache==1.11.1
+django-ultracache>=1.11.5,<2.0
 django-webpack-loader==0.3.3
 djangorestframework==3.4.4
-djangorestframework-extras==0.2
+djangorestframework-extras>=0.2.1,<0.3
 djangorestframework-jwt==1.8.0
 ExifRead==2.1.2
 gunicorn==19.6.0
-jmbo==3.0.0
+jmbo>=3.0.0<4.0
+jmbo-post>=3.0.0<4.0
 jmbo-listing==0.1
 kombu==4.0.0
 lxml==3.6.4
-mote-prk==0.3
+mote-prk>=0.3.1,<0.4
 Markdown==2.6.7
 packaging==16.8
 Pillow==3.2.0
@@ -59,8 +56,6 @@ PyYAML==3.11
 raven==5.32.0
 requests==2.10.0
 six==1.10.0
-South==1.0.2
-termcolor==1.1.0
 vine==1.1.3
 xmltodict==0.10.2
 

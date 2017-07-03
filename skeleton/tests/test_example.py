@@ -66,7 +66,10 @@ class TestExample(TestCase):
         #    (reverse("auth:logout"), 302),
         #    (reverse("auth:password_reset"), 200),
         #]
-        urls = []
+        urls = [
+            (reverse("mote:home"), 200),
+            ("/api/v1/", 200),
+        ]
         for url, code in urls:
             print "Checking path %s" % url
             response = self.client.get(url)

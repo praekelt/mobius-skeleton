@@ -11,7 +11,6 @@ const
 
     // Webpack Utils
     Merge = require('webpack-merge'),
-    Validate = require('webpack-validator'),
 
     // Grab dependencies dict from package.json
     Dependencies = Object.keys(require('./package.json')).dependencies || {};
@@ -56,7 +55,6 @@ const BASE_CONFIG = {
     },
     resolve: {
         extensions: [
-            '',
             '.js',
             '.jsx',
             '.css',
@@ -64,21 +62,17 @@ const BASE_CONFIG = {
             '.sass',
             '.json'
         ],
-        modulesDirectories: [
+        modules: [
             'node_modules',
             ProjectPaths.src + '/patterns'
         ]
     },
     module: {
-        preLoaders: [
+        rules: [
             {
                 test: /\.j[s|sx]$/,
-                loaders: ['eslint'],
-                include: ProjectPaths.src
-            },
-            {
-                test: /\.scss$/,
-                loaders: ['postcss'],
+                enforce: 'pre',
+                loader: 'eslint-loader',
                 include: ProjectPaths.src
             }
         ]
@@ -104,13 +98,6 @@ function configBuilder(process, config) {
                         // https://github.com/webpack/webpack/issues/300
                         styles: [ Path.join(__dirname, MotePath + '/src', 'styles.scss') ]
                     },
-                    postcss: function() { // TODO: Make this a part of extractCSS and setupCSS
-                        return [
-                            require('autoprefixer'),
-                            require('pixrem'),
-                            require('cssnano')
-                        ]
-                    }
                 },
                 Helpers.clean(ProjectPaths.dist),
                 Helpers.setFreeVariable(
@@ -159,12 +146,6 @@ function configBuilder(process, config) {
                         chunkFilename: '[hash].js', // Used for require.ensure,
                         publicPath: 'http://localhost:3000' + PublicStaticPath
                     },
-                    postcss: function() {
-                        return [
-                            require('autoprefixer'),
-                            require('pixrem')
-                        ]
-                    }
                 },
                 Helpers.dashboard(),
                 Helpers.devServer({
@@ -201,4 +182,4 @@ function configBuilder(process, config) {
 }
 
 
-module.exports = Validate(configBuilder(LifecycleEvent, BASE_CONFIG));
+module.exports = configBuilder(LifecycleEvent, BASE_CONFIG);

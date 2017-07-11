@@ -1,5 +1,5 @@
 const
-    Webpack = require('webpack'),
+    webpack = require('webpack'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     BundleTracker = require('webpack-bundle-tracker'),
@@ -14,7 +14,7 @@ exports.clean = function (path) {
             })
         ]
     }
-}
+};
 
 exports.dashboard = function () {
     return {
@@ -22,7 +22,7 @@ exports.dashboard = function () {
             new Dashboard()
         ]
     }
-}
+};
 
 exports.globSass = function () {
     return {
@@ -33,7 +33,7 @@ exports.globSass = function () {
             }]
         }
     }
-}
+};
 
 exports.extractCSS = function (opts) {
     console.log(opts.include[0]);
@@ -44,30 +44,74 @@ exports.extractCSS = function (opts) {
             new ExtractTextPlugin(opts.filename)
         ],
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?sourceMap'),
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {sourceMap: true}
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true,
+                                    plugins: [
+                                        require('autoprefixer')(),
+                                        require('pixrem')(),
+                                        require('cssnano')(),
+
+                                    ]
+                                }
+                            },
+                            {
+                                loader: 'sass-loader',
+                                options: {sourceMap: true}
+                            }
+                        ]
+                    }),
                     include: opts.include
                 }
             ]
         }
     }
-}
+};
 
 exports.setupCSS = function (opts) {
     return {
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: 'style!css?sourceMap!postcss!sass?sourceMap',
+                    use: [
+                        'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {sourceMap: true}
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: [
+                                    require('autoprefixer')(),
+                                    require('pixrem')(),
+                                ]
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {sourceMap: true}
+                        }
+                    ],
                     include: opts.include
                 }
             ]
         }
     }
-}
+};
 
 exports.lintCSS = function (opts) {
     return {
@@ -85,16 +129,16 @@ exports.lintCSS = function (opts) {
 exports.setupJS = function (paths) {
     return {
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.js$/,
                     include: paths,
-                    loader: 'babel'
+                    loader: 'babel-loader'
                 },
                 {
                     test: /\.jsx$/,
                     include: paths,
-                    loader: 'babel'
+                    loader: 'babel-loader'
                 }
             ]
         }
@@ -106,11 +150,7 @@ exports.minify = function () {
     /* Disabled due to drop_console key throwing error. */
     return {
         plugins: [
-            new Webpack.optimize.UglifyJsPlugin({
-                compress: {
-                    warnings: false,
-                    drop_console: true
-                },
+            new webpack.optimize.UglifyJsPlugin({
                 mangle: {
                     except: ['webpackJsonp']
                 }
@@ -127,7 +167,7 @@ exports.setFreeVariable = function (key, value) {
 
     return {
         plugins: [
-            new Webpack.DefinePlugin(env)
+            new webpack.DefinePlugin(env)
         ]
     };
 }
@@ -142,7 +182,7 @@ exports.extractBundle = function (options) {
         entry: entry,
         plugins: [
             // Extract bundle and manifest files. Manifest is needed for reliable caching.
-            new Webpack.optimize.CommonsChunkPlugin({
+            new webpack.optimize.CommonsChunkPlugin({
                 names: [options.name, 'manifest']
             })
         ]
@@ -182,7 +222,7 @@ exports.devServer = function (opts) {
         plugins: [
             // Enable multi-pass compilation for enhanced performance
             // in larger projects. Good default.
-            new Webpack.HotModuleReplacementPlugin({
+            new webpack.HotModuleReplacementPlugin({
                 multiStep: true
             })
         ]

@@ -27,8 +27,9 @@ exports.dashboard = function () {
 exports.globSass = function () {
     return {
         module: {
-            preLoaders: [{
+            rules: [{
                 test: /\.s[c|a]ss$/,
+                enforce: 'pre',
                 loader: 'import-glob-loader'
             }]
         }

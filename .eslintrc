@@ -45,11 +45,10 @@
 
     "rules": {
         "quotes": [1, "single"],
-    //  "strict": ["error", "global"],
         "require-jsdoc": [0],
         "valid-jsdoc": [0],
         "brace-style": [2, "1tbs", { "allowSingleLine": false }],
-    //  "camelcase": ["error", { "properties": "always" }],
+        "camelcase": [1, { "properties": "always" }],
         "block-spacing": [1, "always"],
         "comma-style": [2, "last"],
         "comma-spacing": [2, { "before": false, "after": true }],

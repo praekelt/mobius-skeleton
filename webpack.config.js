@@ -193,4 +193,4 @@ function configBuilder(process, config, env) {
 }
 
 //TODO: refactor once we have switched too useing --env for all flags instad of using lifecycleEvents.
-module.exports = (env) =>  configBuilder(env, LifecycleEvent, BASE_CONFIG);
+module.exports = (env) =>  configBuilder(LifecycleEvent, BASE_CONFIG, env);

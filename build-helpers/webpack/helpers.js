@@ -4,7 +4,8 @@ const
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     BundleTracker = require('webpack-bundle-tracker'),
     StyleLint = require('stylelint-webpack-plugin'),
-    Dashboard = require('webpack-dashboard/plugin');
+    Dashboard = require('webpack-dashboard/plugin'),
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 exports.clean = function (path) {
     return {
@@ -59,8 +60,19 @@ exports.extractCSS = function (opts) {
                                 loader: 'postcss-loader',
                                 options: {
                                     sourceMap: true,
-                                    plugins: [
-                                        require('autoprefixer')(),
+                                    plugins: () => [
+                                        require('postcss-flexbugs-fixes'),
+                                        require('autoprefixer')({
+                                            browsers: [
+                                                '>1%',
+                                                'last 2 versions',
+                                                'Firefox ESR',
+                                                // React doesn't support IE8 anyway
+                                                'not ie < 9',
+                                            ],
+                                            // will add prefixes only for final and IE versions of specification.
+                                            flexbox: 'no-2009'
+                                        }),
                                         require('pixrem')(),
                                         require('cssnano')(),
 
@@ -74,6 +86,7 @@ exports.extractCSS = function (opts) {
                         ]
                     }),
                     include: opts.include
+                    // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
                 }
             ]
         }
@@ -97,7 +110,17 @@ exports.setupCSS = function (opts) {
                             options: {
                                 sourceMap: true,
                                 plugins: [
-                                    require('autoprefixer')(),
+                                    require('autoprefixer')({
+                                        browsers: [
+                                            '>1%',
+                                            'last 2 versions',
+                                            'Firefox ESR',
+                                            // React doesn't support IE8 anyway
+                                            'not ie < 9',
+                                        ],
+                                        // will add prefixes only for final and IE versions of specification.
+                                        flexbox: 'no-2009'
+                                    }),
                                     require('pixrem')(),
                                 ]
                             }
@@ -125,26 +148,24 @@ exports.lintCSS = function (opts) {
             })
         ]
     }
-}
+};
 
 exports.setupJS = function (paths) {
     return {
         module: {
             rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.(js|jsx)$/,
                     include: paths,
-                    loader: 'babel-loader'
-                },
-                {
-                    test: /\.jsx$/,
-                    include: paths,
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        compact: true,
+                    }
                 }
             ]
         }
     }
-}
+};
 
 exports.minify = function () {
     /* eslint-disable camelcase  */
@@ -152,14 +173,23 @@ exports.minify = function () {
     return {
         plugins: [
             new webpack.optimize.UglifyJsPlugin({
+                compress: {
+                    warnings: false,
+                    // Disabled because of an issue with Uglify breaking seemingly valid code:
+                    // https://github.com/facebookincubator/create-react-app/issues/2376
+                    // Pending further investigation:
+                    // https://github.com/mishoo/UglifyJS2/issues/2011
+                    comparisons: false,
+                },
                 mangle: {
                     except: ['webpackJsonp']
-                }
+                },
+                sourceMap: true,
             })
         ]
     };
     /* eslint-enable */
-}
+};
 
 exports.setFreeVariable = function (key, value) {
     const env = {};
@@ -171,7 +201,7 @@ exports.setFreeVariable = function (key, value) {
             new webpack.DefinePlugin(env)
         ]
     };
-}
+};
 
 exports.extractBundle = function (options) {
     const entry = {};
@@ -188,7 +218,7 @@ exports.extractBundle = function (options) {
             })
         ]
     };
-}
+};
 
 exports.trackBundles = function (opts) {
     return {
@@ -196,11 +226,12 @@ exports.trackBundles = function (opts) {
             new BundleTracker(opts)
         ]
     }
-}
+};
 
 exports.devServer = function (opts) {
     return {
         devServer: {
+            compress: true,
             publicPath: opts.publicPath,
             // Enable history API fallback so HTML5 History API based
             // routing works. This is a good default that will come
@@ -228,4 +259,10 @@ exports.devServer = function (opts) {
             })
         ]
     }
-}
+};
+
+exports.bundleAnalyzer = function (env) {
+    return env.profile
+        ? {plugins: [new BundleAnalyzerPlugin()]}
+        : {};
+};

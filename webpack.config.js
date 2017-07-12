@@ -11,10 +11,9 @@ const
 
     // Webpack Utils
     Merge = require('webpack-merge'),
-    Validate = require('webpack-validator'),
 
     // Grab dependencies dict from package.json
-    Dependencies = Object.keys(require('./package.json')).dependencies || {};
+    VendorDependencies = Object.keys(PACKAGE_JSON.dependencies) || [];
 
 // Set environment variables
 const LifecycleEvent = process.env.npm_lifecycle_event;
@@ -56,7 +55,6 @@ const BASE_CONFIG = {
     },
     resolve: {
         extensions: [
-            '',
             '.js',
             '.jsx',
             '.css',
@@ -64,21 +62,17 @@ const BASE_CONFIG = {
             '.sass',
             '.json'
         ],
-        modulesDirectories: [
+        modules: [
             'node_modules',
             ProjectPaths.src + '/patterns'
         ]
     },
     module: {
-        preLoaders: [
+        rules: [
             {
-                test: /\.j[s|sx]$/,
-                loaders: ['eslint'],
-                include: ProjectPaths.src
-            },
-            {
-                test: /\.scss$/,
-                loaders: ['postcss'],
+                test: /\.(js|jsx)$/,
+                enforce: 'pre',
+                loader: 'eslint-loader',
                 include: ProjectPaths.src
             }
         ]
@@ -86,37 +80,38 @@ const BASE_CONFIG = {
 }
 
 // Stitch together the correct config based on the environment.
-function configBuilder(process, config) {
+function configBuilder(process, config, env) {
     let mergedConfig;
 
     switch (process) {
+        // #################
+        // Profile Build
+        // TODO: refactor config to not tie build script name to exicution type any more.
+        case 'build:profile':
         // ################
         // Production Build
         case 'build':
             mergedConfig = Merge(
                 config,
                 {
+                    // Don't attempt to continue if there are any errors.
+                    bail: true,
+                    // We generate sourcemaps in production. This is slow but gives good results.
+                    // You can exclude the *.map files from the build during deployment.
                     devtool: 'source-map',
                     entry: {
-                        // Because we are inlining these into main.js if env === 'development',
-                        // these will throw an error because entry points may not be required as modules.
-                        // Workaround is to wrap the path in an array as per:
-                        // https://github.com/webpack/webpack/issues/300
-                        styles: [ Path.join(__dirname, MotePath + '/src', 'styles.scss') ]
+                        styles: Path.join(__dirname, MotePath + '/src', 'styles.scss')
                     },
-                    postcss: function() { // TODO: Make this a part of extractCSS and setupCSS
-                        return [
-                            require('autoprefixer'),
-                            require('pixrem'),
-                            require('cssnano')
-                        ]
-                    }
                 },
                 Helpers.clean(ProjectPaths.dist),
                 Helpers.setFreeVariable(
                     'process.env.NODE_ENV',
                     'production'
                 ),
+                Helpers.extractBundle({
+                    name: 'vendor',
+                    entries: VendorDependencies
+                }),
                 Helpers.setupJS(ProjectPaths.src),
                 Helpers.lintCSS({
                     configFile: '.stylelintrc',
@@ -137,7 +132,8 @@ function configBuilder(process, config) {
                 Helpers.trackBundles({
                     path: ProjectPaths.dist,
                     filename: bundlenamePattern(`${Argv.projectName}-${Argv.projectAspect}`)
-                })
+                }),
+                env ? Helpers.bundleAnalyzer(env) : {}
             );
             break;
 
@@ -148,7 +144,9 @@ function configBuilder(process, config) {
             mergedConfig = Merge(
                 config,
                 {
-                    devtool: 'eval-source-map',
+                    // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
+                    // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
+                    devtool: 'cheap-module-source-map',
                     entry: [
                         'webpack-dev-server/client?http://localhost:3000',
                         'webpack/hot/only-dev-server',
@@ -159,12 +157,6 @@ function configBuilder(process, config) {
                         chunkFilename: '[hash].js', // Used for require.ensure,
                         publicPath: 'http://localhost:3000' + PublicStaticPath
                     },
-                    postcss: function() {
-                        return [
-                            require('autoprefixer'),
-                            require('pixrem')
-                        ]
-                    }
                 },
                 Helpers.dashboard(),
                 Helpers.devServer({
@@ -200,5 +192,5 @@ function configBuilder(process, config) {
     return mergedConfig;
 }
 
-
-module.exports = Validate(configBuilder(LifecycleEvent, BASE_CONFIG));
+//TODO: refactor once we have switched too useing --env for all flags instad of using lifecycleEvents.
+module.exports = (env) =>  configBuilder(LifecycleEvent, BASE_CONFIG, env);

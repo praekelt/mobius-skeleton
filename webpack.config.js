@@ -2,6 +2,7 @@
 // SETUP
 
 const BASE_PROJECT_NAME = 'skeleton';
+const PACKAGE_JSON = require('./package.json');
 
 const
     Path = require('path'),

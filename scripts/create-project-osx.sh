@@ -16,9 +16,8 @@ then
 fi
 
 # We need these variations
-APP_UPPER=`echo ${APP} | tr '[:lower:]' '[:upper:]'`
-APP_UNDERSCORE=`echo ${APP} | sed -E 's/-/_/g'`
-APP_UNDERSCORE_UPPER=`echo ${APP_UNDERSCORE} | tr '[:lower:]' '[:upper:]'`
+APP_UNDERSCORE=${APP//-/_}
+APP_UNDERSCORE_UPPER=${APP_UNDERSCORE^^}
 
 # Create the project
 PROJECT_DIR=${CREATE_DIR}/${APP}

@@ -54,10 +54,10 @@ cp -r sideloader ${PROJECT_DIR}
 cp -r skeleton ${APP_DIR}
 
 # Delete pyc files
-find ${PROJECT_DIR} -name "*.pyc" | xargs rm
+find ${PROJECT_DIR} -name "*.pyc" -delete
 
 # Change strings in the newly copied source
-sed -i '.bak' s/name=\"mobius-skeleton\"/name=\"${APP}\"/ ${PROJECT_DIR}/setup.py
+sed -i'.bak' s/name=\"mobius-skeleton\"/name=\"${APP}\"/ ${PROJECT_DIR}/setup.py
 
 # Replace the word skeleton with the app name, taking care to exclude some files
 find ${PROJECT_DIR} -type f -exec sed -i'.bak' s/SKELETON/${APP_UNDERSCORE_UPPER}/g {} +
@@ -70,7 +70,7 @@ mv ${PROJECT_DIR}/mote/projects/skeleton ${PROJECT_DIR}/mote/projects/${APP_UNDE
 
 # Set the secret key
 SECRET_KEY=`date +%s | shasum -a 256 | head -c 56`
-sed -i '.bak' "s/SECRET_KEY_PLACEHOLDER/${SECRET_KEY}/" ${PROJECT_DIR}/project/settings.py
+sed -i'.bak' "s/SECRET_KEY_PLACEHOLDER/${SECRET_KEY}/" ${PROJECT_DIR}/project/settings.py
 
 # Indicate version of jmbo-skeleton used to create project
 VERSION=`sed "5q;d" setup.py | awk -F= '{print $2}'`

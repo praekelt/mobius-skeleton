@@ -17,7 +17,7 @@ fi
 
 # We need these variations
 APP_UNDERSCORE=${APP//-/_}
-APP_UNDERSCORE_UPPER=${APP_UNDERSCORE^^}
+APP_UNDERSCORE_UPPER=`echo ${APP_UNDERSCORE} | tr '[:lower:]' '[:upper:]'`
 
 # Create the project
 PROJECT_DIR=${CREATE_DIR}/${APP}

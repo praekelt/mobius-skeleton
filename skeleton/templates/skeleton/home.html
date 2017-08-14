@@ -13,6 +13,14 @@
 <body>
     <h1>Mobius Skeleton</h1>
 
+    {% if_has_bundle "manifest" "js" %}
+        {% render_bundle "manifest" "js" %}
+    {% end_if_has_bundle %}
+
+    {% if_has_bundle "vendor" "js" %}
+        {% render_bundle "vendor" "js" %}
+    {% end_if_has_bundle %}
+
     {% if_has_bundle "main" "js" %}
         {% render_bundle "main" "js" %}
     {% end_if_has_bundle %}

@@ -1,7 +1,11 @@
 {
     "parser": "babel-eslint",
 
-    "plugins": [],
+    "plugins": [
+        "react"
+    ],
+
+//    "extends": ["eslint:recommended", "plugin:react/recommended"],
 
     "parserOptions": {
         "ecmaVersion": 6,
@@ -9,7 +13,7 @@
         "ecmaFeatures": {
             "globalReturn": true,
             "jsx": true,
-            "modules": true,
+            "modules": true
         }
     },
 
@@ -33,24 +37,35 @@
         "sinon": true
     },
 
+    /*
+    "off" or 0 - turn the rule off
+    "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
+    "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
+    */
+
     "rules": {
-        "quotes": ["error", "single", { "avoidEscape": true }],
-        "strict": ["error", "global"],
+        "quotes": [1, "single"],
         "require-jsdoc": [0],
         "valid-jsdoc": [0],
-        "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
-        "camelcase": ["error", { "properties": "always" }],
-        "block-spacing": ["error", "always"],
-        "comma-style": ["error", "last"],
-        "comma-spacing": ["error", { "before": false, "after": true }],
-        "indent": ["error", 4, {"SwitchCase": 1}],
+        "brace-style": [2, "1tbs", { "allowSingleLine": false }],
+        "camelcase": [1, { "properties": "always" }],
+        "block-spacing": [1, "always"],
+        "comma-style": [2, "last"],
+        "comma-spacing": [2, { "before": false, "after": true }],
+        "indent": [1, 4, {"SwitchCase": 1}],
         "no-ternary": [0],
-        "padded-blocks": ["error", "never"],
-        "semi-spacing": ["error"],
-        "space-infix-ops": ["error"],
-        "keyword-spacing": ["error"],
-        "space-in-parens": ["error", "never"],
-        "no-mixed-spaces-and-tabs": ["error"],
-        "quote-props": ["error", "consistent", { "keywords": true, "unnecessary": false }]
+        "padded-blocks": [1, "never"],
+        "semi-spacing": [2],
+        "space-infix-ops": [2],
+        "keyword-spacing": [2],
+        "space-in-parens": [2, "never"],
+        "no-mixed-spaces-and-tabs": [2],
+        "eqeqeq": [2, "smart"],
+        "quote-props": [2, "consistent", { "keywords": true, "unnecessary": false }],
+        "no-inner-declarations": [0],
+        "react/prop-types": [0],
+    //  "react/jsx-indent": [1, 4],
+        "no-console": [0],
+        "no-unused-vars": [0]
     }
 }

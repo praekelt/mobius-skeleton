@@ -1,10 +1,11 @@
 const
-    Webpack = require('webpack'),
+    webpack = require('webpack'),
     CleanWebpackPlugin = require('clean-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     BundleTracker = require('webpack-bundle-tracker'),
     StyleLint = require('stylelint-webpack-plugin'),
-    Dashboard = require('webpack-dashboard/plugin');
+    Dashboard = require('webpack-dashboard/plugin'),
+    BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 exports.clean = function (path) {
     return {
@@ -14,7 +15,7 @@ exports.clean = function (path) {
             })
         ]
     }
-}
+};
 
 exports.dashboard = function () {
     return {
@@ -22,18 +23,19 @@ exports.dashboard = function () {
             new Dashboard()
         ]
     }
-}
+};
 
 exports.globSass = function () {
     return {
         module: {
-            preLoaders: [{
+            rules: [{
                 test: /\.s[c|a]ss$/,
+                enforce: 'pre',
                 loader: 'import-glob-loader'
             }]
         }
     }
-}
+};
 
 exports.extractCSS = function (opts) {
     console.log(opts.include[0]);
@@ -44,30 +46,96 @@ exports.extractCSS = function (opts) {
             new ExtractTextPlugin(opts.filename)
         ],
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?sourceMap'),
+                    use: ExtractTextPlugin.extract({
+                        fallback: 'style-loader',
+                        use: [
+                            {
+                                loader: 'css-loader',
+                                options: {sourceMap: true}
+                            },
+                            {
+                                loader: 'postcss-loader',
+                                options: {
+                                    sourceMap: true,
+                                    plugins: () => [
+                                        require('postcss-flexbugs-fixes'),
+                                        require('autoprefixer')({
+                                            browsers: [
+                                                '>1%',
+                                                'last 2 versions',
+                                                'Firefox ESR',
+                                                // React doesn't support IE8 anyway
+                                                'not ie < 9',
+                                            ],
+                                            // will add prefixes only for final and IE versions of specification.
+                                            flexbox: 'no-2009'
+                                        }),
+                                        require('pixrem')(),
+                                        require('cssnano')(),
+
+                                    ]
+                                }
+                            },
+                            {
+                                loader: 'sass-loader',
+                                options: {sourceMap: true}
+                            }
+                        ]
+                    }),
                     include: opts.include
+                    // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
                 }
             ]
         }
     }
-}
+};
 
 exports.setupCSS = function (opts) {
     return {
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.s[c|a]ss$/,
-                    loader: 'style!css?sourceMap!postcss!sass?sourceMap',
+                    use: [
+                        'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {sourceMap: true}
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                plugins: [
+                                    require('autoprefixer')({
+                                        browsers: [
+                                            '>1%',
+                                            'last 2 versions',
+                                            'Firefox ESR',
+                                            // React doesn't support IE8 anyway
+                                            'not ie < 9',
+                                        ],
+                                        // will add prefixes only for final and IE versions of specification.
+                                        flexbox: 'no-2009'
+                                    }),
+                                    require('pixrem')(),
+                                ]
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {sourceMap: true}
+                        }
+                    ],
                     include: opts.include
                 }
             ]
         }
     }
-}
+};
 
 exports.lintCSS = function (opts) {
     return {
@@ -80,45 +148,48 @@ exports.lintCSS = function (opts) {
             })
         ]
     }
-}
+};
 
 exports.setupJS = function (paths) {
     return {
         module: {
-            loaders: [
+            rules: [
                 {
-                    test: /\.js$/,
+                    test: /\.(js|jsx)$/,
                     include: paths,
-                    loader: 'babel'
-                },
-                {
-                    test: /\.jsx$/,
-                    include: paths,
-                    loader: 'babel'
+                    loader: 'babel-loader',
+                    options: {
+                        compact: true,
+                    }
                 }
             ]
         }
     }
-}
+};
 
 exports.minify = function () {
     /* eslint-disable camelcase  */
     /* Disabled due to drop_console key throwing error. */
     return {
         plugins: [
-            new Webpack.optimize.UglifyJsPlugin({
+            new webpack.optimize.UglifyJsPlugin({
                 compress: {
                     warnings: false,
-                    drop_console: true
+                    // Disabled because of an issue with Uglify breaking seemingly valid code:
+                    // https://github.com/facebookincubator/create-react-app/issues/2376
+                    // Pending further investigation:
+                    // https://github.com/mishoo/UglifyJS2/issues/2011
+                    comparisons: false,
                 },
                 mangle: {
                     except: ['webpackJsonp']
-                }
+                },
+                sourceMap: true,
             })
         ]
     };
     /* eslint-enable */
-}
+};
 
 exports.setFreeVariable = function (key, value) {
     const env = {};
@@ -127,10 +198,10 @@ exports.setFreeVariable = function (key, value) {
 
     return {
         plugins: [
-            new Webpack.DefinePlugin(env)
+            new webpack.DefinePlugin(env)
         ]
     };
-}
+};
 
 exports.extractBundle = function (options) {
     const entry = {};
@@ -142,12 +213,12 @@ exports.extractBundle = function (options) {
         entry: entry,
         plugins: [
             // Extract bundle and manifest files. Manifest is needed for reliable caching.
-            new Webpack.optimize.CommonsChunkPlugin({
+            new webpack.optimize.CommonsChunkPlugin({
                 names: [options.name, 'manifest']
             })
         ]
     };
-}
+};
 
 exports.trackBundles = function (opts) {
     return {
@@ -155,11 +226,12 @@ exports.trackBundles = function (opts) {
             new BundleTracker(opts)
         ]
     }
-}
+};
 
 exports.devServer = function (opts) {
     return {
         devServer: {
+            compress: true,
             publicPath: opts.publicPath,
             // Enable history API fallback so HTML5 History API based
             // routing works. This is a good default that will come
@@ -182,9 +254,15 @@ exports.devServer = function (opts) {
         plugins: [
             // Enable multi-pass compilation for enhanced performance
             // in larger projects. Good default.
-            new Webpack.HotModuleReplacementPlugin({
+            new webpack.HotModuleReplacementPlugin({
                 multiStep: true
             })
         ]
     }
-}
+};
+
+exports.bundleAnalyzer = function (env) {
+    return env.profile
+        ? {plugins: [new BundleAnalyzerPlugin()]}
+        : {};
+};

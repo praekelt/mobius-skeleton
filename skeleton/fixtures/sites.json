@@ -17,7 +17,7 @@
     },
     {
         "pk": 1,
-        "model": "sites.sitesgroup",
+        "model": "sites_groups.sitesgroup",
         "fields": {
             "sites": [
                 1
@@ -27,7 +27,7 @@
     },
     {
         "pk": 2,
-        "model": "sites.sitesgroup",
+        "model": "sites_groups.sitesgroup",
         "fields": {
             "sites": [
                 2,

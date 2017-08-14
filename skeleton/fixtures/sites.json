@@ -1,47 +1,39 @@
 [
     {
-        "pk": 1, 
-        "model": "sites.site", 
+        "pk": 1,
+        "model": "sites.site",
         "fields": {
-            "domain": "www.site.com", 
+            "domain": "www.site.com",
             "name": "Web site"
         }
     },
     {
-        "pk": 2, 
-        "model": "sites.site", 
+        "pk": 2,
+        "model": "sites.site",
         "fields": {
-            "domain": "m.site.com", 
+            "domain": "m.site.com",
             "name": "Mobi site (basic)"
         }
     },
     {
-        "pk": 4, 
-        "model": "sites.site", 
-        "fields": {
-            "domain": "m.site.com", 
-            "name": "Mobi site (smart)"
-        }
-    },
-    {
-        "pk": 1, 
-        "model": "sites.sitesgroup", 
+        "pk": 1,
+        "model": "sites.sitesgroup",
         "fields": {
             "sites": [
                 1
-            ], 
+            ],
             "title": "Web"
         }
     },
     {
-        "pk": 2, 
-        "model": "sites.sitesgroup", 
+        "pk": 2,
+        "model": "sites.sitesgroup",
         "fields": {
             "sites": [
-                2, 
+                2,
                 4
-            ], 
+            ],
             "title": "Mobi"
         }
-    } 
+    }
 ]

@@ -2,10 +2,6 @@
 # edit it if you have to change a version of a module. Add new modules in
 # requirements.txt.
 
--e git+https://github.com/praekelt/django-formfactory.git@develop#egg=django-formfactory
--e git+https://github.com/praekelt/django-link.git@develop#egg=django-link
--e git+https://github.com/praekelt/django-navbuilder.git@develop#egg=django-navbuilder
--e git+https://github.com/praekelt/django-preferences.git#egg=django-preferences
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 
 Django>=1.11,<1.12
@@ -24,13 +20,17 @@ django-contrib-comments==1.7.1
 django-crum==0.7.1
 django-export==1.9.2
 django-form-renderers==0.3.2
+django-formfactory>=0.1,<0.2
 django-formtools==2.0
 django-layers-hr==1.11.0
 django-likes>=1.11,<2.0
+django-link>=0.1,<0.2
+django-navbuilder>=0.1,<0.2
 django-nested-admin==3.0.12
 django-object-tools>=1.9,<2.0
 django-pagination-fork==1.0.17
 django-photologue==3.5.1
+django-preferences>=0.2,<0.3
 django-secretballot==0.6.0
 django-simplemde==0.0.9
 django-sites-groups>=1.11.1,<2.0

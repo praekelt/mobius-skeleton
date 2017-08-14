@@ -28,8 +28,8 @@ Directory containing various settings files and ``urls.py`` for the project.
 scripts
 -------
 
-Directory containing reference bash scripts to setup an Ubuntu 14.04 server and
-to deploy a production quality Jmbo project.
+Directory containing reference bash scripts to setup an Ubuntu 14.04 server+ and
+to deploy a production quality Mobius project.
 
 config.yaml
 -----------
@@ -67,5 +67,4 @@ wsgi.py
 -------
 
 Script to run the site as a WSGI server.
-
 

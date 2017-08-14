@@ -1,24 +1,24 @@
 Documentation
 =============
 
-**Jmbo Skeleton generates skeleton code for the development of a Jmbo based project.**
+**Mobius Skeleton generates skeleton code for the development of a Mobius based project.**
 
-This documentation covers version |version| of |jmbo-skeleton|.
+This documentation covers version |version| of |mobius-skeleton|.
 
 .. note::
-    |jmbo-skeleton| |version| requires Django 1.6. More on :ref:`versions`.
+    |mobius-skeleton| |version| requires Django 1.10+. More on :ref:`versions`.
 
 Quickstart
 ----------
 
-A demo application is provided for Ubuntu 14.04 systems. The script installs
+A demo application is provided for Ubuntu 14.04+ systems. The script installs
 required libraries and may prompt you for your password. From the command line do::
 
  ./demo.sh
 
-Bootstrap a Jmbo project. The script prompts you for options. From the command line do::
+Bootstrap a Mobius project. The script prompts you for options. From the command line do::
 
- ./scripts/create-jmbo-project.sh
+ ./scripts/create-project.sh
 
 Skeleton structure
 ------------------
@@ -33,18 +33,18 @@ Help
 
 .. toctree::
    :maxdepth: 1
-   
+
    changelog
 
 Code
 ----
 
-https://github.com/praekelt/jmbo-skeleton
+https://github.com/praekelt/mobius-skeleton
 
 .. _versions:
 
 Versions and Compatibility
 --------------------------
 
-* Jmbo Skeleton 2.x: Compatible with Jmbo 2.x and Django 1.6
+* Mobius Skeleton 2.x: Compatible with Jmbo 3.x and Django 1.10+
 

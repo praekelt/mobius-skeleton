@@ -1,4 +1,14 @@
 <!doctype html>
+{% load mobius_tags webpack_loader %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Mobius Skeleton</title>
+
+    {% if_has_bundle "style" "css" %}
+        {% render_bundle "style" "css" %}
+    {% end_if_has_bundle %}
+</head>
 {% if composer_slots %}
     {% load composer_tags %}
 {% endif %}
@@ -8,6 +18,18 @@
 {% endcomment %}
 
 <body>
+    {% if_has_bundle "manifest" "js" %}
+        {% render_bundle "manifest" "js" %}
+    {% end_if_has_bundle %}
+
+    {% if_has_bundle "vendor" "js" %}
+        {% render_bundle "vendor" "js" %}
+    {% end_if_has_bundle %}
+
+    {% if_has_bundle "main" "js" %}
+        {% render_bundle "main" "js" %}
+    {% end_if_has_bundle %}
+
     <div id="header">
         {% if composer_slots.header %}
             {% composer header %}
@@ -37,3 +59,4 @@
         {% endif %}
     </div>
 </body>
+</html>

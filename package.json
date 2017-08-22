@@ -48,5 +48,10 @@
     "webpack-dev-server": "^2.5.1",
     "webpack-merge": "^4.1.0",
     "yargs": "^8.0.2"
+  },
+  "dependencies": {
+    "lazysizes": "^4.0.0-rc3",
+    "picturefill": "^3.0.2",
+    "reset-css": "^2.2.1"
   }
 }

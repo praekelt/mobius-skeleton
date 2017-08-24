@@ -203,22 +203,11 @@ exports.setFreeVariable = function (key, value) {
     };
 };
 
-exports.extractBundle = function (options) {
-    const entry = {};
-
-    entry[options.name] = options.entries;
-
-    return {
-        // Define entry point for splitting
-        entry: entry,
-        plugins: [
-            // Extract bundle and manifest files. Manifest is needed for reliable caching.
-            new webpack.optimize.CommonsChunkPlugin({
-                names: [options.name, 'manifest']
-            })
-        ]
-    };
-};
+exports.extractBundles = (bundles) => ({
+    plugins: bundles.map((bundle) => (
+        new webpack.optimize.CommonsChunkPlugin(bundle)
+    ))
+});
 
 exports.trackBundles = function (opts) {
     return {

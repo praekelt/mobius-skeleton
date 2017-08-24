@@ -109,10 +109,20 @@ function configBuilder(process, config, env) {
                     'process.env.NODE_ENV',
                     'production'
                 ),
-                Helpers.extractBundle({
-                    name: 'vendor',
-                    entries: VendorDependencies
-                }),
+                Helpers.extractBundles([
+                    {
+                        name: 'vendor',
+                        minChunks: ({resource}) => (
+                            resource &&
+                            resource.indexOf('node_modules') >= 0 &&
+                            resource.match(/\.js$/)
+                        )
+                    },
+                    {
+                        name: 'manifest',
+                        minChunks: Infinity
+                    }
+                ]),
                 Helpers.setupJS(ProjectPaths.src),
                 Helpers.lintCSS({
                     configFile: '.stylelintrc',

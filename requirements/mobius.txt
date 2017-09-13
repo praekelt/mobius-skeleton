@@ -63,6 +63,7 @@ raven==5.32.0
 requests==2.10.0
 six==1.10.0
 xmltodict==0.10.2
+yamlordereddictloader==0.4.0
 
 # Needed by composer, can be removed once composer has a UI
 django-nested-admin==3.0.12

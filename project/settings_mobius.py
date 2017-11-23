@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     "rest_framework_extras",
     "ultracache",
     "webpack_loader",
+    "channels"
 )
 
 MIDDLEWARE_CLASSES = (

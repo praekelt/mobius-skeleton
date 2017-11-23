@@ -19,7 +19,8 @@ from django.conf import settings
 
 from jmbo.models import ModelBase, Image, ModelBaseImage
 from post.models import Post
-
+from channels import Channel
+from channels.test import ChannelTestCase
 
 RES_DIR = os.path.join(os.path.dirname(__file__), "res")
 IMAGE_PATH = os.path.join(RES_DIR, "image.jpg")

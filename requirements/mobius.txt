@@ -65,6 +65,7 @@ six==1.10.0
 xmltodict==0.10.2
 yamlordereddictloader==0.4.0
 channels==1.1.8
+asgi_redis==1.4.3
 
 # Needed by composer, can be removed once composer has a UI
 django-nested-admin==3.0.12

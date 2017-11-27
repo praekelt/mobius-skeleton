@@ -3,9 +3,12 @@ language: python
 cache: pip
 
 env:
-  - TOXENV=django111
+  - TOXENV=django111-travis
 
 install:
   - pip install tox
 
-script: tox
+script:
+  - npm install
+  - npm run build
+  - tox

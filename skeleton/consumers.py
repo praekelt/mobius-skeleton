@@ -10,8 +10,6 @@ from channels.generic.websockets import WebsocketConsumer
 
 logger = logging.getLogger(__name__)
 
-ALLOW_ANONYMOUS_CHAT = False
-
 
 class EchoConsumer(WebsocketConsumer):
     """

@@ -6,9 +6,9 @@ env:
   - TOXENV=django111-travis
 
 install:
-  - pip install tox
-
-script:
+  - nvm install
   - npm install
   - npm run build
-  - tox
+  - pip install tox
+
+script: tox

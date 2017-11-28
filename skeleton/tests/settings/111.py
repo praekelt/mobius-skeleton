@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     "rest_framework_extras",
     "ultracache",
     "webpack_loader",
+    "channels",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -214,3 +215,25 @@ WEBPACK_LOADER = {
 
 # Celery runs synchronously for tests
 CELERY_TASK_ALWAYS_EAGER = True
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+            "channel_capacity": {
+                "daphne.response*": 2000,  # Important for stability
+                "http.connect": 2000,
+                "http.request": 2000,
+                "http.response*": 2000,
+                "http.disconnect": 2000,
+                "websocket.receive": 2000,
+                "websocket.send*": 2000,
+                "websocket.connect": 2000,
+                "websocket.disconnect": 2000,
+            },
+            "group_expiry": 300  # Default 86400, but recommended to be lower
+        },
+        "ROUTING": "skeleton.routing.channel_routing",
+    }
+}

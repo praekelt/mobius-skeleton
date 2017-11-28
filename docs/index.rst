@@ -36,6 +36,14 @@ Help
 
    changelog
 
+Django-Channels
+----
+
+.. toctree::
+   :maxdepth: 1
+
+   channels
+
 Code
 ----
 

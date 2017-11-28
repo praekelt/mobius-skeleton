@@ -2,6 +2,9 @@ sudo: false
 language: python
 cache: pip
 
+services:
+  - redis-server
+  
 env:
   - TOXENV=django111-travis
 

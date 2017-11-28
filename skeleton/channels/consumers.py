@@ -1,9 +1,3 @@
-"""
-For the CallCentreBot we do not allow anonymous chat with Feersum.
-Every consumer function has access to the user (as message.user) and one can
-use the standard Django functions to check if the user is authentication,
-a member of staff, etc.
-"""
 import logging
 
 from channels.generic.websockets import WebsocketConsumer
@@ -30,7 +24,7 @@ class EchoConsumer(WebsocketConsumer):
         # Accept the connection
         message.reply_channel.send({"accept": True})
 
-        name = "Anonymous" if message.user.is_anonymous else \
+        name = "" if message.user.is_anonymous else \
              message.user.first_name or message.user.username
         self.send(text="Hello, {}".format(name))
 

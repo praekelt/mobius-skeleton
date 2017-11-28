@@ -234,6 +234,6 @@ CHANNEL_LAYERS = {
             },
             "group_expiry": 300  # Default 86400, but recommended to be lower
         },
-        "ROUTING": "skeleton.routing.channel_routing",
+        "ROUTING": "skeleton.channels.routing.channel_routing",
     }
 }

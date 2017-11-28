@@ -1,5 +1,6 @@
 from channels import route_class
-from skeleton.consumers import EchoConsumer
+
+from skeleton.channels.consumers import EchoConsumer
 
 
 channel_routing = [

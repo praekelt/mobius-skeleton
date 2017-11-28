@@ -21,6 +21,7 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
+    "channels",
     "django_comments",
     "form_renderers",
     "formtools",
@@ -58,8 +59,7 @@ INSTALLED_APPS = (
     "rest_framework",
     "rest_framework_extras",
     "ultracache",
-    "webpack_loader",
-    "channels",
+    "webpack_loader"
 )
 
 MIDDLEWARE_CLASSES = (

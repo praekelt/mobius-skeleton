@@ -24,7 +24,7 @@ class EchoConsumer(WebsocketConsumer):
         # Accept the connection
         message.reply_channel.send({"accept": True})
 
-        name = "" if message.user.is_anonymous else \
+        name = "Anonymous" if message.user.is_anonymous else \
              message.user.first_name or message.user.username
         self.send(text="Hello, {}".format(name))
 

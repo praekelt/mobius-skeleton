@@ -16,6 +16,7 @@ INSTALLED_APPS = (
     "jmbo",
     "photologue",
     "category",
+    "channels",
     "composer",
     "django_comments",
     "form_renderers",
@@ -54,7 +55,7 @@ INSTALLED_APPS = (
     "rest_framework",
     "rest_framework_extras",
     "ultracache",
-    "webpack_loader",
+    "webpack_loader"
 )
 
 MIDDLEWARE_CLASSES = (
@@ -212,3 +213,25 @@ LAYERS = {"tree": ["basic", ["web"]]}
 
 # The default value of ALLOWED_HOSTS gets in the way, so change
 ALLOWED_HOSTS = ["*"]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+            "channel_capacity": {
+                "daphne.response*": 2000,  # Important for stability
+                "http.connect": 2000,
+                "http.request": 2000,
+                "http.response*": 2000,
+                "http.disconnect": 2000,
+                "websocket.receive": 2000,
+                "websocket.send*": 2000,
+                "websocket.connect": 2000,
+                "websocket.disconnect": 2000,
+            },
+            "group_expiry": 300  # Default 86400, but recommended to be lower
+        },
+        "ROUTING": "skeleton.channels.routing.channel_routing",
+    }
+}

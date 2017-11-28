@@ -7,7 +7,7 @@ VENV=${1:-ve}
 echo "Ensuring required system libraries are installed. You may be prompted for your password."
 sudo apt-get install python-virtualenv python-dev \
 libjpeg-dev zlib1g-dev build-essential git-core \
-sqlite libxslt1-dev --no-upgrade
+sqlite redis-server libxslt1-dev --no-upgrade
 
 echo "Setting up sandboxed Python environment."
 rm -rf ${VENV}

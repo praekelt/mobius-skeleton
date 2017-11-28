@@ -15,11 +15,8 @@ from django.db.models.fields import BigIntegerField, BooleanField, CharField, \
     SlugField, SmallIntegerField, TextField, AutoField
 from django.db.models.fields.files import ImageField
 from django.db.models.fields.related import OneToOneField
-from django.conf import settings
 
 from jmbo.models import ModelBase, Image, ModelBaseImage
-from post.models import Post
-
 
 RES_DIR = os.path.join(os.path.dirname(__file__), "res")
 IMAGE_PATH = os.path.join(RES_DIR, "image.jpg")

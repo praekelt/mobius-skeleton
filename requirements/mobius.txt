@@ -20,7 +20,7 @@ django-contrib-comments==1.7.1
 django-crum==0.7.1
 django-export==1.9.2
 django-form-renderers==0.3.2
-django-formfactory>=0.1,<0.2
+django-formfactory>=0.2,<0.3
 django-formtools==2.0
 django-layers-hr==1.11.0
 django-likes>=1.11,<2.0

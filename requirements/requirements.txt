@@ -1,4 +1,4 @@
 # Add new modules here.
 
 -r mobius.txt
-psycopg2==2.6.1
+psycopg2==2.7.2

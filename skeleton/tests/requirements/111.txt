@@ -1,7 +1,7 @@
 -e git+https://github.com/praekelt/mobius.git@develop#egg=mobius
 
 Django>=1.11,<1.12
-psycopg2==2.6.1
+psycopg2==2.7.2
 
 amqp==2.1.4
 appdirs==1.4.0

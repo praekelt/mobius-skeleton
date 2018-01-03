@@ -13,7 +13,7 @@ billiard==3.5.0.2
 cached-property==1.2.0
 celery==4.0.0
 contextlib2==0.5.4
-django-cache-headers>=0.2,<0.3
+django-cache-headers>=0.3,<0.4
 django-category>=1.9,<2.0
 django-composer-prk>=0.1,<0.2
 django-contrib-comments==1.7.1

@@ -18,6 +18,6 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 install:
-  - pip install -e .
+  - pip install tox-run-before
 
 script: tox

@@ -29,7 +29,7 @@ setup(
     ],
     include_package_data=True,
     tests_require=[
-        "tox"
+        "tox",
         "tox-run-before"
     ],
     classifiers=[

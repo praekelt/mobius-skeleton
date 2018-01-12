@@ -30,6 +30,7 @@ setup(
     include_package_data=True,
     tests_require=[
         "tox"
+        "tox-run-before"
     ],
     classifiers=[
         "Programming Language :: Python",

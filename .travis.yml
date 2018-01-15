@@ -18,9 +18,6 @@ before_install:
   - export PATH=$HOME/.yarn/bin:$PATH
 
 install:
-  - yarn
-  - yarn build
-  - yarn build --env.project=rbt
-  - pip install tox
+  - pip install tox-run-before
 
 script: tox

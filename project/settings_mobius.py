@@ -238,5 +238,6 @@ CHANNEL_LAYERS = {
 
 ULTRACACHE = {
     "purge": {"method": "ultracache.purgers.broadcast"},
+    "consider-headers": ["host"],
     "consider-cookies": ["sessionid", "messages", "isauthenticated"]
 }

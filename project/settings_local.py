@@ -5,7 +5,27 @@ import raven
 # Declare or redeclare variables here
 FOOFOO = 1
 
-# You should redefine the CACHE setting here
+# Uncomment to use PostgreSQL as database
+#DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": "skeleton",
+#        "USER": "postgres",
+#        "PASSWORD": "",
+#        "HOST": "",
+#        "PORT": "5432",
+#        "CONN_MAX_AGE": 600
+#    }
+#}
+
+# Uncomment to use memcache as caching backend
+#CACHES = {
+#    "default": {
+#        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+#        "LOCATION": "127.0.0.1:11211",
+#        "KEY_PREFIX": "skeleton",
+#    },
+#}
 
 # Configure raven. Set "dsn" to None for your development environment. It must
 # be None - anything else causes problems.

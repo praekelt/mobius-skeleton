@@ -1,0 +1,119 @@
+server {
+    listen 80;
+    server_name ${SERVER_NAME};
+
+    location ^~ /media/ {
+        alias   /media/;
+        expires 1d;
+    }
+
+    location ^~ /static/ {
+        alias   /static/;
+        expires 1d;
+    }
+
+    location /ws/ {
+        proxy_pass_header Server;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 20s;
+        proxy_pass http://${VARNISH_HOST}:80;
+        proxy_intercept_errors on;
+        keepalive_timeout 0;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        add_header Last-Modified "";
+    }
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 20s;
+        proxy_pass http://${VARNISH_HOST}:80;
+        proxy_intercept_errors on;
+        keepalive_timeout 60 60;
+        add_header Last-Modified "";
+    }
+}
+
+server {
+    listen 443 http2;
+    server_name ${SERVER_NAME};
+
+    ssl_certificate     /etc/nginx/default.crt;
+    ssl_certificate_key /etc/nginx/default.key;
+    ssl on;
+    ssl_session_cache  builtin:1000  shared:SSL:10m;
+    ssl_protocols  TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers HIGH:!aNULL:!eNULL:!EXPORT:!CAMELLIA:!DES:!MD5:!PSK:!RC4;
+    ssl_prefer_server_ciphers on;
+
+    location ^~ /media/ {
+        alias   /media/;
+        expires 1d;
+    }
+
+    location ^~ /static/ {
+        alias   /static/;
+        expires 1d;
+    }
+
+    location /api/ {
+        proxy_pass_header Server;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 20s;
+        proxy_pass http://${VARNISH_HOST}:80;
+        proxy_intercept_errors on;
+        keepalive_timeout 60 60;
+        proxy_http_version 1.1;
+        add_header Last-Modified "";
+    }
+
+    location /ws/ {
+        proxy_pass_header Server;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 20s;
+        proxy_pass http://${VARNISH_HOST}:80;
+        proxy_intercept_errors on;
+        keepalive_timeout 0;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        add_header Last-Modified "";
+    }
+
+    location / {
+        proxy_pass_header Server;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 20s;
+        proxy_pass http://${VARNISH_HOST}:80;
+        proxy_intercept_errors on;
+        keepalive_timeout 60 60;
+        add_header Last-Modified "";
+    }
+}

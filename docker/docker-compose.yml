@@ -1,0 +1,196 @@
+version: "3"
+
+services:
+    nginx01:
+        image: praekeltcom/mobius-nginx-${PROJECT}:latest
+        depends_on:
+            - "varnish"
+        volumes:
+            - /tmp/static:/static
+            - /tmp/media:/media
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.10
+                aliases:
+                    - nginx
+
+    nginx02:
+        image: praekeltcom/mobius-nginx-${PROJECT}:latest
+        depends_on:
+            - "varnish"
+        volumes:
+            - /tmp/static:/static
+            - /tmp/media:/media
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.11
+                aliases:
+                    - nginx
+
+    varnish:
+        image: praekeltcom/mobius-varnish-${PROJECT}:latest
+        depends_on:
+            - "rabbitmq"
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.20
+
+    memcached:
+        image: memcached:alpine
+        environment:
+            - MEMCACHED_MEMORY_LIMIT=128
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.30
+
+    postgres:
+        image: postgres:alpine
+        environment:
+              POSTGRES_PASSWORD:
+              POSTGRES_DB: ${PROJECT}
+        restart: always
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.32
+
+    rabbitmq:
+        image: rabbitmq:alpine
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.34
+
+    redis:
+        image: redis:alpine
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.36
+
+    migrate:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        environment:
+            - LC_ALL=C.UTF-8
+            - FEERSUM_NLU_DATABASE_URL=postgresql://postgres:5432/feersumnlu?user=feersumnlu
+        depends_on:
+            - "postgres"
+        volumes:
+            - /tmp/media:/var/app/media
+            - /tmp/static:/static
+        command: sh -c '/wait-for-postgres.sh -t 60 -- python manage.py collectstatic --noinput && python manage.py migrate && python manage.py create_admin_user && /scripts.sh'
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.39
+
+    celery01:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        environment:
+            - C_FORCE_ROOT="true"
+        depends_on:
+            - "postgres"
+            - "rabbitmq"
+        volumes:
+            - /tmp/media:/var/app/media
+        command: celery -A project worker --loglevel=info
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.40
+
+    celery02:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        environment:
+            - C_FORCE_ROOT="true"
+        depends_on:
+            - "postgres"
+            - "rabbitmq"
+        volumes:
+            - /tmp/media:/var/app/media
+        command: celery -A project worker --loglevel=info
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.41
+
+    celerybeat:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        environment:
+            - C_FORCE_ROOT="true"
+        depends_on:
+            - "postgres"
+            - "rabbitmq"
+        command: celery -A project beat --loglevel=info
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.49
+
+    daphne01:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        depends_on:
+            - "postgres"
+        command: daphne project.asgi:channel_layer -b 0.0.0.0 -p 80
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.50
+                aliases:
+                    - daphne
+
+    daphne02:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        depends_on:
+            - "postgres"
+        command: daphne project.asgi:channel_layer -b 0.0.0.0 -p 80
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.51
+                aliases:
+                    - daphne
+
+    runworker01:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        command: python manage.py runworker
+        depends_on:
+            - "postgres"
+        volumes:
+            - /tmp/media:/var/app/media
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.70
+
+    runworker02:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        command: python manage.py runworker
+        depends_on:
+            - "postgres"
+        volumes:
+            - /tmp/media:/var/app/media
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.71
+
+    app01:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        depends_on:
+            - "postgres"
+        volumes:
+            - /tmp/media:/var/app/media
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.100
+                aliases:
+                    - app
+
+    app02:
+        image: praekeltcom/mobius-app-${PROJECT}:latest
+        depends_on:
+            - "postgres"
+        volumes:
+            - /tmp/media:/var/app/media
+        networks:
+            vnet:
+                ipv4_address: 192.168.17.101
+                aliases:
+                    - app
+
+networks:
+    vnet:
+        driver: bridge
+        ipam:
+            config:
+                - subnet: 192.168.17.0/24

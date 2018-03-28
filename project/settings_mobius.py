@@ -122,7 +122,6 @@ DATABASES = {
     )
 }
 
-# todo: use dummycache as default
 CACHES = {
     "default": env.cache(
         "CACHE_URL",

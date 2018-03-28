@@ -1,10 +1,10 @@
-*.swp
-*.pyc
+**/*.swp
+**/*.swo
+**/*.pyc
 *.egg-info
 ve/
 build/
 dist/
-*.swo
 /docs/_build
 coverage.xml
 pep8.txt
@@ -22,4 +22,4 @@ bower_components/
 media/
 docker/
 !/docker/app/scripts/
-settings_local.py
+**/settings_local.py

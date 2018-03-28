@@ -9,7 +9,9 @@ INSTALLED_APPS = ["skeleton"] + INSTALLED_APPS
 SKELETON = {
 }
 
-# Typically used in actual deploys
+# settings_local.py is a convenient place to do extra configuration during
+# development.  However, it is not the right place to set debug - use the .env
+# file for that.
 try:
     import settings_local
     from settings_local import *
@@ -20,12 +22,3 @@ else:
         lcl = locals()
         di = settings_local.configure(**locals())
         lcl.update(**di)
-
-# Use a cached template loader if not in debug mode
-if not DEBUG:
-    loaders = TEMPLATES[0]["OPTIONS"]["loaders"]
-    TEMPLATES[0]["OPTIONS"]["loaders"] = \
-        [("django.template.loaders.cached.Loader", loaders)]
-
-# settings_local probably changes the value of DEBUG, so put all code dependent
-# on the DEBUG value below this comment.

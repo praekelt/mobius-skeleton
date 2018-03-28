@@ -46,8 +46,8 @@ services:
     postgres:
         image: postgres:alpine
         environment:
-              POSTGRES_PASSWORD:
-              POSTGRES_DB: ${PROJECT}
+              POSTGRES_PASSWORD: password
+              POSTGRES_DB: app
         restart: always
         networks:
             vnet:
@@ -67,9 +67,8 @@ services:
 
     migrate:
         image: praekeltcom/mobius-app-${PROJECT}:latest
-        environment:
-            - LC_ALL=C.UTF-8
-            - FEERSUM_NLU_DATABASE_URL=postgresql://postgres:5432/feersumnlu?user=feersumnlu
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
         volumes:
@@ -82,8 +81,8 @@ services:
 
     celery01:
         image: praekeltcom/mobius-app-${PROJECT}:latest
-        environment:
-            - C_FORCE_ROOT="true"
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
             - "rabbitmq"
@@ -96,8 +95,8 @@ services:
 
     celery02:
         image: praekeltcom/mobius-app-${PROJECT}:latest
-        environment:
-            - C_FORCE_ROOT="true"
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
             - "rabbitmq"
@@ -110,8 +109,8 @@ services:
 
     celerybeat:
         image: praekeltcom/mobius-app-${PROJECT}:latest
-        environment:
-            - C_FORCE_ROOT="true"
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
             - "rabbitmq"
@@ -122,6 +121,8 @@ services:
 
     daphne01:
         image: praekeltcom/mobius-app-${PROJECT}:latest
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
         command: daphne project.asgi:channel_layer -b 0.0.0.0 -p 80
@@ -133,6 +134,8 @@ services:
 
     daphne02:
         image: praekeltcom/mobius-app-${PROJECT}:latest
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
         command: daphne project.asgi:channel_layer -b 0.0.0.0 -p 80
@@ -144,6 +147,8 @@ services:
 
     runworker01:
         image: praekeltcom/mobius-app-${PROJECT}:latest
+        env_file:
+            - app.env
         command: python manage.py runworker
         depends_on:
             - "postgres"
@@ -155,6 +160,8 @@ services:
 
     runworker02:
         image: praekeltcom/mobius-app-${PROJECT}:latest
+        env_file:
+            - app.env
         command: python manage.py runworker
         depends_on:
             - "postgres"
@@ -166,6 +173,8 @@ services:
 
     app01:
         image: praekeltcom/mobius-app-${PROJECT}:latest
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
         volumes:
@@ -178,6 +187,8 @@ services:
 
     app02:
         image: praekeltcom/mobius-app-${PROJECT}:latest
+        env_file:
+            - app.env
         depends_on:
             - "postgres"
         volumes:

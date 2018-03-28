@@ -22,3 +22,4 @@ bower_components/
 media/
 docker/
 !/docker/app/scripts/
+settings_local.py

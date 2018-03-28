@@ -1,38 +1,40 @@
-import os
-import raven
+# This file is useful during development and must never be checked in.
 
+import os
+
+
+# NB: do not set DEBUG here. Some settings depend on it and setting it here has
+# no effect. Edit an .env file and set it there. See
+# https://django-environ.readthedocs.io/en/latest/ for details.
 
 # Declare or redeclare variables here
 FOOFOO = 1
 
-# Uncomment to use PostgreSQL as database
-#DATABASES = {
-#    "default": {
-#        "ENGINE": "django.db.backends.postgresql",
-#        "NAME": "skeleton",
-#        "USER": "postgres",
-#        "PASSWORD": "",
-#        "HOST": "",
-#        "PORT": "5432",
-#        "CONN_MAX_AGE": 600
-#    }
-#}
-
-# Uncomment to use memcache as caching backend
-#CACHES = {
-#    "default": {
-#        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-#        "LOCATION": "127.0.0.1:11211",
-#        "KEY_PREFIX": "skeleton",
-#    },
-#}
-
-# Configure raven. Set "dsn" to None for your development environment. It must
-# be None - anything else causes problems.
-RAVEN_CONFIG = {
-    "dsn": None
-#    "dsn": "https://<key>:<secret>@sentry.io/<project>",
+# Uncomment to use PostgreSQL as database or set in an .env file
+"""
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "skeleton",
+        "USER": "postgres",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": "5432",
+        "CONN_MAX_AGE": 600
+    }
 }
+"""
+
+# Uncomment to use memcache as caching backend or set in an .env file
+"""
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "LOCATION": "127.0.0.1:11211",
+        "KEY_PREFIX": "skeleton",
+    },
+}
+"""
 
 # Uncomment if you are doing performance profiling with Django Debug Toolbar
 """

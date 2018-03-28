@@ -3,12 +3,18 @@
 import os
 from os.path import expanduser
 
+import environ
+import raven
+
+
+env = environ.Env()
+environ.Env.read_env()
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-SECRET_KEY = "SECRET_KEY_PLACEHOLDER"
+SECRET_KEY = env("SECRET_KEY", default="SECRET_KEY_PLACEHOLDER")
 
-DEBUG = True
+DEBUG = env("DEBUG", default=True)
 
 INSTALLED_APPS = (
     # The order is important
@@ -99,15 +105,29 @@ TEMPLATES = [
     },
 ]
 
+# Use a cached template loader if not in debug mode
+if not DEBUG:
+    loaders = TEMPLATES[0]["OPTIONS"]["loaders"]
+    TEMPLATES[0]["OPTIONS"]["loaders"] = \
+        [("django.template.loaders.cached.Loader", loaders)]
+
 ROOT_URLCONF = "project.urls"
 
 WSGI_APPLICATION = "project.wsgi.application"
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-    }
+    "default": env.db(
+        "DATABASE_URL",
+        "sqlite:///" + os.path.join(BASE_DIR, "db.sqlite")
+    )
+}
+
+# todo: use dummycache as default
+CACHES = {
+    "default": env.cache(
+        "CACHE_URL",
+        "dummycache://"
+    )
 }
 
 LANGUAGE_CODE = "en-us"
@@ -185,13 +205,6 @@ LOGGING = {
     },
 }
 
-# Dummy cache is the default
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
-    }
-}
-
 WEBPACK_LOADER = {
     "DEFAULT": {
         "CACHE": not DEBUG,
@@ -206,8 +219,6 @@ WEBPACK_LOADER = {
     }
 }
 
-FORM_RENDERERS = {"enable-bem-classes": True}
-
 # The default layers config has basic -> web
 LAYERS = {"tree": ["basic", ["web"]]}
 
@@ -218,7 +229,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            "hosts": [(env("REDIS_HOST", default="localhost"), 6379)],
             "channel_capacity": {
                 "daphne.response*": 2000,  # Important for stability
                 "http.connect": 2000,
@@ -241,3 +252,12 @@ ULTRACACHE = {
     "consider-headers": ["host"],
     "consider-cookies": ["sessionid", "messages", "isauthenticated"]
 }
+
+# Sentry client
+RAVEN_CONFIG = {
+    "dsn":  env("RAVEN_DSN", default=None)
+}
+
+# Let Celery use RabbitMQ by default
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="amqp://guest:guest@rabbitmq:5672//")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", default="amqp://guest:guest@rabbitmq:5672//")

@@ -17,7 +17,7 @@ acl purge {
 
 # Load balancer
 probe myprobe {
-    .url = "/";
+    .url = "/mobius/health/";
     .window = 5;
     .threshold = 3;
     .interval = 5s;

@@ -33,6 +33,10 @@ Nginx
 ``nginx-base`` provides a reasonable ``nginx.template``. If it is not sufficient then
 create ``nginx/nginx.template`` and provide your own version.
 
+``nginx-base`` also provides a reference SSL key ``default.key`` and
+certificate ``default.crt``.  You should place your actual key in
+``nginx/default.key`` and actual certificate in ``nginx/default.crt``.
+
 Varnish
 *******
 

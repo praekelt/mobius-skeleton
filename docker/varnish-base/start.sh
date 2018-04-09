@@ -1,4 +1,4 @@
 #!/bin/sh
 
-python /src/django-ultracache-twisted/purge/threaded.py -c /purge.yaml &
+python /src/django-ultracache/cache-purge-consumer.py -c /purge.yaml &
 varnishd -F -f /etc/varnish/default.vcl

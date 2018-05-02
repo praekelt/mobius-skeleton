@@ -258,5 +258,5 @@ RAVEN_CONFIG = {
 }
 
 # Let Celery use RabbitMQ by default
-CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="amqp://guest:guest@rabbitmq:5672//")
-CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", default="amqp://guest:guest@rabbitmq:5672//")
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="amqp://guest:guest@localhost:5672//")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", default="amqp://guest:guest@localhost:5672//")

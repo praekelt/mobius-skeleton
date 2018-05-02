@@ -13,8 +13,8 @@ SKELETON = {
 # development.  However, it is not the right place to set debug - use the .env
 # file for that.
 try:
-    import settings_local
-    from settings_local import *
+    import project.settings_local as settings_local
+    from project.settings_local import *
 except ImportError:
     pass
 else:

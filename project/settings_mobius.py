@@ -111,6 +111,12 @@ if not DEBUG:
     TEMPLATES[0]["OPTIONS"]["loaders"] = \
         [("django.template.loaders.cached.Loader", loaders)]
 
+# Speed up Mote during development
+#if DEBUG:
+#    loaders = TEMPLATES[0]["OPTIONS"]["loaders"]
+#    TEMPLATES[0]["OPTIONS"]["loaders"] = \
+#        [("mote.loaders.cached.Loader", loaders)]
+
 ROOT_URLCONF = "project.urls"
 
 WSGI_APPLICATION = "project.wsgi.application"

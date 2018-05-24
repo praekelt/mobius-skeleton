@@ -7,4 +7,4 @@ from celery.task.schedules import crontab
     ignore_result=True
 )
 def sample_task():
-    print "Sample task"
+    print("Sample task")
